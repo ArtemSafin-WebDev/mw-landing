@@ -1,0 +1,21 @@
+import "virtual:svg-icons-register";
+import "../scss/style.scss";
+import storiesBlockSlider from "./storiesBlockSlider";
+import menu from "./menu";
+import loader from "./loader";
+import storiesModal from "./storiesModal";
+import aboutUs from "./aboutUs";
+import projects from "./projects";
+
+document.addEventListener("DOMContentLoaded", () => {
+  storiesBlockSlider();
+  menu();
+  storiesModal();
+  aboutUs();
+  projects();
+});
+
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+  loader();
+});

@@ -1,0 +1,51 @@
+@mixin noScrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar * {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}
+
+@mixin customScrollbar {
+  scrollbar-color: var(--primary-color) white;
+  scrollbar-width: thin;
+  &::-webkit-scrollbar {
+    background-color: white;
+    width: 0.6rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: white;
+  }
+}
+
+@mixin blockWrapper {
+  display: grid;
+  grid-template-columns:
+    [main-start] 1fr [content-start] minmax(0, var(--container-width, 0))
+    [content-end] 1fr [main-end];
+  grid-gap: var(--content-padding, 0);
+}
+
+@mixin blockContent {
+  grid-column-start: content-start;
+  grid-column-end: content-end;
+}

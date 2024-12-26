@@ -1,0 +1,315 @@
+.about-us {
+  @include blockWrapper;
+}
+
+.about-us__content {
+  @include blockContent;
+}
+
+.about-us__card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "stack";
+  overflow: hidden;
+  overflow: clip;
+  background-color: var(--text-color);
+  color: white;
+  position: relative;
+  isolation: isolate;
+  backface-visibility: hidden;
+  border-radius: 0.5rem;
+
+  @include breakpoint(laptop) {
+    border-radius: 0.3177rem;
+  }
+
+  @include breakpoint(mobile) {
+    border-radius: 0.5rem;
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    padding-bottom: 40.9%;
+    grid-area: stack;
+
+    @include breakpoint(mobile) {
+      padding-bottom: 100%;
+    }
+  }
+}
+
+.about-us__card-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 115%;
+  z-index: -1;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    background-color: rgba(black, 0.3);
+  }
+}
+
+.about-us__card-bg-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-us__card-content {
+  align-self: center;
+  justify-self: center;
+  grid-area: stack;
+  z-index: 2;
+  padding: 3rem;
+
+  @include breakpoint(mobile) {
+    padding: 1rem;
+  }
+}
+
+.about-us__card-title {
+  font-size: 8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -0.32rem;
+  text-align: center;
+  @include breakpoint(laptop) {
+    font-size: 5.0833rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: -0.2033rem;
+  }
+
+  @include breakpoint(mobile) {
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: -0.16rem;
+  }
+}
+
+.about-us__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-gap: var(--column-gap);
+  padding-top: 3rem;
+  border-top: 1px solid #d4d4d4;
+  margin-bottom: 17rem;
+
+  @include breakpoint(laptop) {
+    padding-top: 2rem;
+    margin-bottom: 8rem;
+  }
+
+  @include breakpoint(mobile) {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+    margin-bottom: 12.5rem;
+  }
+}
+
+.about-us__info {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-gap: var(--column-gap);
+  align-items: flex-start;
+
+  @include breakpoint(mobile) {
+    border-top: 1px solid #d4d4d4;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+  }
+}
+
+.about-us__info-heading {
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4rem;
+  letter-spacing: -0.08rem;
+  grid-column: 1 / 3;
+
+  @include breakpoint(laptop) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -0.064rem;
+  }
+
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.032rem;
+    font-family: var(--inter-display);
+  }
+}
+
+.about-us__info-text {
+  grid-column: 3 / 6;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4rem;
+  letter-spacing: -0.08rem;
+
+  @include breakpoint(laptop) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -0.064rem;
+    grid-column: 3 / -1;
+  }
+
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.032rem;
+    font-family: var(--inter-display);
+  }
+}
+
+.about-us__expertise {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-gap: var(--column-gap);
+  align-items: flex-start;
+  @include breakpoint(mobile) {
+    border-top: 1px solid #d4d4d4;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+  }
+}
+
+.about-us__expertise-heading {
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4rem;
+  letter-spacing: -0.08rem;
+  grid-column: 1 / 3;
+
+  @include breakpoint(laptop) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -0.064rem;
+  }
+
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.032rem;
+    font-family: var(--inter-display);
+  }
+}
+
+.about-us__expertise-list {
+  grid-column: 3 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @include breakpoint(laptop) {
+    gap: 1rem;
+  }
+
+  @include breakpoint(mobile) {
+    grid-column: 1 / -1;
+    gap: 0.5rem;
+  }
+}
+
+.about-us__expertise-list-item {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-gap: var(--column-gap);
+
+  @include breakpoint(mobile) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  &::before {
+    content: counter(ordered-list, decimal-leading-zero);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.4rem;
+    letter-spacing: -0.08rem;
+    grid-column: 1 / 2;
+
+    @include breakpoint(laptop) {
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 120%;
+      letter-spacing: -0.064rem;
+    }
+
+    @include breakpoint(mobile) {
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 2rem;
+      letter-spacing: -0.032rem;
+      font-family: var(--inter-display);
+      grid-column: span 1;
+    }
+  }
+}
+
+.about-us__expertise-text {
+  grid-column: 2 / -1;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4rem;
+  letter-spacing: -0.08rem;
+
+  @include breakpoint(laptop) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -0.064rem;
+  }
+
+  @include breakpoint(mobile) {
+    grid-column: span 1;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.032rem;
+    font-family: var(--inter-display);
+  }
+}

@@ -139,9 +139,15 @@ export default function storiesModal() {
   const texts = Array.from(
     document.querySelectorAll<HTMLElement>(".stories__modal-slider-card-text")
   );
-  texts.forEach((text) =>
+  texts.forEach((text) => {
     text.addEventListener("click", () => {
       text.classList.toggle("shown");
-    })
-  );
+    });
+    text.addEventListener("mouseenter", () => {
+      text.classList.add("shown");
+    });
+    text.addEventListener("mouseleave", () => {
+      text.classList.remove("shown");
+    });
+  });
 }

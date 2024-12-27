@@ -24,6 +24,17 @@
 .intro__bg-item {
   position: absolute;
   inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease 0.2s, visibility 0s ease 0.4s;
+  z-index: 5;
+
+  &.active {
+    opacity: 1;
+    visibility: inherit;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 6;
+  }
 }
 
 .intro__bg-item-image {

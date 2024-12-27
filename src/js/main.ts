@@ -6,6 +6,7 @@ import loader from "./loader";
 import storiesModal from "./storiesModal";
 import aboutUs from "./aboutUs";
 import projects from "./projects";
+import intro from "./intro";
 
 document.addEventListener("DOMContentLoaded", () => {
   storiesBlockSlider();
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   storiesModal();
   aboutUs();
   projects();
+  intro();
 });
 
 window.addEventListener("load", () => {

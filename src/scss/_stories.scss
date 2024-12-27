@@ -175,6 +175,14 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas: "stack";
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      .stories__slider-card-image-container::after {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .stories__slider-card-image-container {
@@ -188,6 +196,16 @@
     content: "";
     display: block;
     padding-bottom: 177%;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(black, 0.35);
+    opacity: 0;
+    z-index: 10;
+    transition: opacity 0.2s;
   }
 
   @include breakpoint(laptop) {

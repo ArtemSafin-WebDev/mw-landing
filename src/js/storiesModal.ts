@@ -136,6 +136,13 @@ export default function storiesModal() {
     });
   });
 
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      storiesModal.classList.remove("active");
+      document.body.classList.remove("modal-open");
+    }
+  });
+
   const texts = Array.from(
     document.querySelectorAll<HTMLElement>(".stories__modal-slider-card-text")
   );

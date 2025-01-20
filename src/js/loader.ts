@@ -76,6 +76,7 @@ export default function loader() {
       duration: 0.6,
     }).add(() => {
       loader.remove();
+      document.dispatchEvent(new CustomEvent("loader:hidden"));
     });
 
     tl.from(

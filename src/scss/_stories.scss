@@ -304,7 +304,7 @@
   background-color: var(--red);
   grid-column: 1 / 2;
   grid-row: 1 / 2;
-
+  border-radius: 0.5rem;
   @include breakpoint(laptop) {
     font-size: 1.0167rem;
     font-style: normal;
@@ -525,6 +525,10 @@
   margin: auto;
   width: 47.5rem;
   max-width: 100%;
+
+  @media (max-width: 1470px) {
+    width: 40rem;
+  }
 
   @include breakpoint(laptop) {
     width: 26rem;

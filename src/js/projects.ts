@@ -24,7 +24,7 @@ export default function projects() {
       });
 
       tl.from(card, {
-        clipPath: "inset(0 100% 0 0)",
+        // clipPath: "inset(0 100% 0 0)",
         autoAlpha: 0,
         duration: 1,
       });

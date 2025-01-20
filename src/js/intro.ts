@@ -4,6 +4,7 @@ export default function intro() {
   const elements = Array.from(document.querySelectorAll<HTMLElement>(".intro"));
 
   elements.forEach((element) => {
+    const introBtn = element.querySelector<HTMLLinkElement>(".intro__btn");
     const bgItems = Array.from(
       element.querySelectorAll<HTMLElement>(".intro__bg-item")
     );
@@ -11,20 +12,19 @@ export default function intro() {
       element.querySelectorAll<HTMLElement>(".intro__project-name-item")
     );
 
-    const cycle = (length: number) => {
-      let activeIndex = 0;
+    let activeIndex = 0;
 
-      return () => {
-        if (activeIndex < length - 1) {
-          activeIndex += 1;
-        } else {
-          activeIndex = 0;
-        }
-        return activeIndex;
-      };
+    const length = bgItems.length;
+    const cycle = () => {
+      if (activeIndex < length - 1) {
+        activeIndex += 1;
+      } else {
+        activeIndex = 0;
+      }
+      return activeIndex;
     };
 
-    const getIndex = cycle(bgItems.length);
+    let timer: gsap.core.Tween | null = null;
 
     const setActive = (index: number) => {
       bgItems.forEach((item) => item.classList.remove("active"));
@@ -32,11 +32,19 @@ export default function intro() {
       bgItems[index]?.classList.add("active");
       nameItems[index]?.classList.add("active");
 
-      gsap.delayedCall(1, () => {
-        setActive(getIndex());
+      timer?.kill();
+      timer = gsap.delayedCall(1.5, () => {
+        setActive(cycle());
       });
     };
 
-    setActive(getIndex());
+    introBtn?.addEventListener("mouseenter", () => {
+      setActive(cycle());
+    });
+
+    introBtn?.addEventListener("mouseleave", () => {
+      timer?.kill();
+      timer = null;
+    });
   });
 }

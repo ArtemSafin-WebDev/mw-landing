@@ -122,7 +122,7 @@ export default function storiesModal() {
     );
     card.addEventListener("click", (_event) => {
       if (instance) {
-        instance.slideTo(slideIndex);
+        instance.slideTo(slideIndex, 0);
         storiesModal.classList.add("active");
         document.body.classList.add("modal-open");
       }

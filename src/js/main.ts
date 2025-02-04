@@ -8,9 +8,11 @@ import aboutUs from "./aboutUs";
 import projects from "./projects";
 import intro from "./intro";
 import smoothScrolling from "./smoothScrolling";
+import header from "./header";
 
 document.addEventListener("DOMContentLoaded", () => {
   smoothScrolling();
+  header();
   storiesBlockSlider();
   menu();
   storiesModal();

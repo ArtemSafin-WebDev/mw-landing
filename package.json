@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@types/inputmask": "^5.0.3",
+    "@types/lodash": "^4.17.15",
     "@types/node": "^20.7.0",
     "@types/postcss-preset-env": "^8.0.0",
     "@types/validator": "^13.11.1",
@@ -25,6 +26,7 @@
     "@studio-freight/lenis": "^1.0.42",
     "gsap": "^3.12.5",
     "inputmask": "^5.0.8",
+    "lodash": "^4.17.21",
     "swiper": "^11.1.15",
     "validator": "^13.11.0"
   }

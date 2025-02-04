@@ -1,13 +1,16 @@
 .projects {
   @include blockWrapper;
   margin-bottom: 35rem;
+  padding-top: 25rem;
 
   @include breakpoint(laptop) {
     margin-bottom: 22rem;
+    padding-top: 16rem;
   }
 
   @include breakpoint(mobile) {
     margin-bottom: 14rem;
+    padding-top: 14rem;
   }
 }
 

@@ -1,38 +1,64 @@
 <header class="page-header">
     <div class="page-header__content">
-        <a href="#" class="page-header__logo">
+        <a href="#" class="page-header__logo page-header__logo--hidden-on-start">
             <img src="/images/mw-logo.svg" alt="" class="page-header__logo-image">
+            <img src="/images/mw-logo-white.svg" alt="" class="page-header__logo-image">
         </a>
         <div class="page-header__studio">
-            Mark Weber<br> Studio
+            <span>
+                Mark Weber Studio
+            </span>
+            <span>
+                Mark Weber Studio
+            </span>
         </div>
         <div class="page-header__menu" data-lenis-prevent="">
             <nav class="page-header__nav">
                 <ul class="page-header__nav-list">
                     <li class="page-header__nav-list-item">
                         <a href="#projects" class="page-header__nav-link">
-                            Проекты
+                            <span>
+                                Проекты
+                            </span>
+                            <span aria-hidden="true">
+                                Проекты
+                            </span>
+
                         </a>
                     </li>
                     <li class="page-header__nav-list-item">
                         <a href="#about" class="page-header__nav-link">
-                            О нас
+                            <span>
+                                О нас
+                            </span>
+                            <span aria-hidden="true">
+                                О нас
+                            </span>
                         </a>
                     </li>
                     <li class="page-header__nav-list-item">
                         <a href="#contacts" class="page-header__nav-link">
-                            Контакты
+                            <span>
+                                Контакты
+                            </span>
+                            <span aria-hidden="true">
+                                Контакты
+                            </span>
                         </a>
                     </li>
                 </ul>
             </nav>
             <div class="page-header__years">
-                ©2014—2024
+                © 2014—2024
             </div>
             <div class="page-header__showreel">
                 <a href="#" class="page-header__showreel-card">
                     <div class="page-header__showreel-card-image-container">
                         <img src="/images/showreel.webp" alt="" class="page-header__showreel-card-image">
+                        <video loop="" muted="" autoplay="" playsinline="" class="page-header__showreel-card-image">
+                            <source src="/video/showreel_h265.mp4" type="video/mp4; codecs=hevc,mp4a.40.2">
+                            <source src="/video/showreel.mp4" type="video/mp4">
+                        </video>
                     </div>
                     <div class="page-header__showreel-card-row">
                         <div class="page-header__showreel-card-info">
@@ -50,13 +76,27 @@
                 </a>
             </div>
         </div>
+        <a href="#" class="page-header__callback-btn page-header__callback-btn--hidden-on-start">
+            Начать проект
+        </a>
         <button class="page-header__burger">
-            <svg width="14" height="14" aria-hidden="true">
-                <use xlink:href="#burger-closed"></use>
-            </svg>
-            <svg width="14" height="14" aria-hidden="true">
-                <use xlink:href="#burger-open"></use>
-            </svg>
+            <span class="page-header__burger-inner">
+                <svg width="14" height="14" aria-hidden="true">
+                    <use xlink:href="#burger-closed"></use>
+                </svg>
+                <svg width="14" height="14" aria-hidden="true">
+                    <use xlink:href="#burger-open"></use>
+                </svg>
+            </span>
+            <span class="page-header__burger-inner">
+                <svg width="14" height="14" aria-hidden="true">
+                    <use xlink:href="#burger-closed"></use>
+                </svg>
+                <svg width="14" height="14" aria-hidden="true">
+                    <use xlink:href="#burger-open"></use>
+                </svg>
+            </span>
+
         </button>
     </div>
 </header>

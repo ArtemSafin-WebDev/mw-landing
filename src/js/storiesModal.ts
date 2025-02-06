@@ -39,11 +39,11 @@ export default function storiesModal() {
     const cardSlider = new StoryCardSlider(card);
     cardSliders.push(cardSlider);
   }
-
+  let activeIndex = 0;
   const handleWidthChange = (e: MediaQueryListEvent | MediaQueryList) => {
     if (e.matches) {
       if (instance) instance.destroy();
-      let activeIndex = 0;
+      activeIndex = 0;
       instance = new Swiper(container, {
         slidesPerView: 1,
         speed: 600,
@@ -64,13 +64,17 @@ export default function storiesModal() {
             initCardSlider(swiper);
             activeIndex = swiper.activeIndex;
           },
+          destroy: () => {
+            cardSliders.forEach((cardSlider) => cardSlider.destroy());
+            cardSliders = [];
+          },
         },
       });
       instance.init();
     } else {
       if (instance) instance.destroy();
 
-      let activeIndex = 0;
+      activeIndex = 0;
 
       instance = new Swiper(container, {
         slidesPerView: 1,
@@ -87,19 +91,24 @@ export default function storiesModal() {
             initCardSlider(swiper);
             activeIndex = swiper.activeIndex;
           },
+          destroy: () => {
+            cardSliders.forEach((cardSlider) => cardSlider.destroy());
+            cardSliders = [];
+          },
         },
       });
 
       instance.init();
-
-      slides.forEach((slide, slideIndex) => {
-        slide.addEventListener("click", () => {
-          if (slideIndex === activeIndex) return;
-          instance?.slideTo(slideIndex);
-        });
-      });
     }
   };
+
+  slides.forEach((slide, slideIndex) => {
+    slide.addEventListener("click", () => {
+      if (slideIndex === activeIndex) return;
+      instance?.slideTo(slideIndex);
+      console.log("Sliding to", slideIndex);
+    });
+  });
 
   mql.addEventListener("change", handleWidthChange);
 
@@ -109,6 +118,7 @@ export default function storiesModal() {
     event.preventDefault();
     storiesModal.classList.remove("active");
     document.body.classList.remove("modal-open");
+    document.dispatchEvent(new CustomEvent("storymodal:close"));
   });
 
   cards.forEach((card) => {
@@ -133,6 +143,8 @@ export default function storiesModal() {
       if (activeSlider) {
         activeSlider.restart();
       }
+
+      document.dispatchEvent(new CustomEvent("storymodal:open"));
     });
   });
 
@@ -140,6 +152,7 @@ export default function storiesModal() {
     if (event.key === "Escape") {
       storiesModal.classList.remove("active");
       document.body.classList.remove("modal-open");
+      document.dispatchEvent(new CustomEvent("storymodal:close"));
     }
   });
 

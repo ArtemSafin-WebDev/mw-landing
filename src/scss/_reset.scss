@@ -45,11 +45,13 @@ body.modal-open {
   overscroll-behavior: none;
 }
 
-body:has(.loader) {
-  touch-action: none;
-  -webkit-overflow-scrolling: none;
-  overflow: hidden;
-  overscroll-behavior: none;
+@include breakpointMF(small-tablet) {
+  body:has(.loader) {
+    touch-action: none;
+    -webkit-overflow-scrolling: none;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
 }
 
 main {

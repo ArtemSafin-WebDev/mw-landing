@@ -15,6 +15,7 @@ export default class StoryCardSlider {
   private autoplayTween: gsap.core.Tween | null = null;
   private pauseTimer: any = null;
   private longPress = false;
+  private sliderOnHold = true;
 
   private options: SwiperOptions = {
     speed: 400,
@@ -29,6 +30,8 @@ export default class StoryCardSlider {
     allowTouchMove: false,
   };
   constructor(public card: HTMLElement) {
+    if (this.card.closest(".stories__modal")?.classList.contains("active"))
+      this.sliderOnHold = false;
     this.container = card.querySelector(".swiper");
     this.bullets = Array.from(
       card.querySelectorAll(".stories__modal-slider-card-progress-bullet")
@@ -42,19 +45,16 @@ export default class StoryCardSlider {
           init: false,
           on: {
             init: (swiper) => {
-              this.setPaginationBullets(swiper.realIndex);
-              const duration = this.getCurrentSlideDuration(swiper);
-              this.autoplay(swiper.realIndex, duration);
-              // this.playVideo(swiper);
+              if (this.sliderOnHold) return;
+              this.runSlider(swiper);
             },
             slideChange: (swiper) => {
-              this.setPaginationBullets(swiper.realIndex);
-              const duration = this.getCurrentSlideDuration(swiper);
-              this.autoplay(swiper.realIndex, duration);
-              this.playVideo(swiper);
-            },
-            destroy: () => {
-              this.stopVideos();
+              if (
+                swiper.previousIndex === swiper.activeIndex ||
+                this.sliderOnHold
+              )
+                return;
+              this.runSlider(swiper);
             },
           },
         },
@@ -68,7 +68,28 @@ export default class StoryCardSlider {
     this.container?.addEventListener("click", this.handleSideClick);
 
     console.log("Stories slider created");
+
+    document.addEventListener("storymodal:open", () => {
+      this.sliderOnHold = false;
+      if (this.instance) this.runSlider(this.instance);
+    });
+    document.addEventListener("storymodal:close", () => {
+      this.sliderOnHold = true;
+      this.pauseSlider();
+    });
   }
+
+  private pauseSlider = () => {
+    this.autoplayTween?.kill();
+    if (this.instance) this.pauseCurrentVideo(this.instance);
+  };
+
+  private runSlider = (swiper: Swiper) => {
+    this.setPaginationBullets(swiper.realIndex);
+    const duration = this.getCurrentSlideDuration(swiper);
+    this.autoplay(swiper.realIndex, duration);
+    this.playVideo(swiper);
+  };
 
   private stopVideos = () => {
     this.slides.forEach((slide) => {
@@ -173,6 +194,7 @@ export default class StoryCardSlider {
 
   public destroy = () => {
     this.instance?.destroy(true);
+    this.stopVideos();
     this.card.classList.remove("slider-initialized");
     this.container?.removeEventListener("pointerdown", this.pause);
     this.container?.removeEventListener("pointerup", this.play);

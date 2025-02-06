@@ -45,11 +45,16 @@ export default class StoryCardSlider {
               this.setPaginationBullets(swiper.realIndex);
               const duration = this.getCurrentSlideDuration(swiper);
               this.autoplay(swiper.realIndex, duration);
+              // this.playVideo(swiper);
             },
             slideChange: (swiper) => {
               this.setPaginationBullets(swiper.realIndex);
               const duration = this.getCurrentSlideDuration(swiper);
               this.autoplay(swiper.realIndex, duration);
+              this.playVideo(swiper);
+            },
+            destroy: () => {
+              this.stopVideos();
             },
           },
         },
@@ -64,6 +69,34 @@ export default class StoryCardSlider {
 
     console.log("Stories slider created");
   }
+
+  private stopVideos = () => {
+    this.slides.forEach((slide) => {
+      const video = slide?.querySelector<HTMLVideoElement>("video");
+      if (!video) return;
+      video?.pause();
+      video.currentTime = 0;
+    });
+  };
+
+  private playVideo = (swiper: Swiper) => {
+    const activeSlide = this.slides[swiper.realIndex];
+    this.stopVideos();
+    const video = activeSlide?.querySelector<HTMLVideoElement>("video");
+    video?.play();
+    console.log("Video is playing");
+  };
+
+  private pauseCurrentVideo = (swiper: Swiper) => {
+    const activeSlide = this.slides[swiper.realIndex];
+    const video = activeSlide?.querySelector<HTMLVideoElement>("video");
+    video?.pause();
+  };
+  private playCurrentVideo = (swiper: Swiper) => {
+    const activeSlide = this.slides[swiper.realIndex];
+    const video = activeSlide?.querySelector<HTMLVideoElement>("video");
+    video?.play();
+  };
 
   private getCurrentSlideDuration = (swiper: Swiper) => {
     const index = swiper.realIndex;
@@ -105,6 +138,7 @@ export default class StoryCardSlider {
     this.pauseTimer = setTimeout(() => {
       this.longPress = true;
       this.autoplayTween?.pause();
+      if (this.instance) this.pauseCurrentVideo(this.instance);
     }, 300);
   };
 
@@ -117,6 +151,7 @@ export default class StoryCardSlider {
     if (!this.container) return;
     if (this.longPress) {
       this.longPress = false;
+      if (this.instance) this.playCurrentVideo(this.instance);
       return;
     }
 

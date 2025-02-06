@@ -9,14 +9,20 @@ document.addEventListener("DOMContentLoaded", () => {
       like.classList.toggle("active");
     })
   );
-  const sounds = Array.from(
+  const soundBtns = Array.from(
     document.querySelectorAll(".stories__modal-slider-card-sound")
   );
 
-  sounds.forEach((like) =>
-    like.addEventListener("click", (event) => {
+  soundBtns.forEach((soundBtn) =>
+    soundBtn.addEventListener("click", (event) => {
       event.preventDefault();
-      like.classList.toggle("active");
+      soundBtn.classList.toggle("active");
+      const parentCard = soundBtn.closest(".stories__modal-slider-card");
+      if (!parentCard) return;
+      // const videos = Array.from(parentCard.querySelectorAll("video"));
+      // videos.forEach((video) => {
+      //   video.muted = !video.muted;
+      // });
     })
   );
 });

@@ -145,13 +145,13 @@ export default class StoryCardSlider {
   private play = () => {
     if (this.pauseTimer) clearTimeout(this.pauseTimer);
     if (this.autoplayTween?.paused) this.autoplayTween?.play();
+    if (this.instance) this.playCurrentVideo(this.instance);
   };
 
   private handleSideClick = (event: MouseEvent) => {
     if (!this.container) return;
     if (this.longPress) {
       this.longPress = false;
-      if (this.instance) this.playCurrentVideo(this.instance);
       return;
     }
 

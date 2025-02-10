@@ -10,9 +10,9 @@ export default function loader() {
   const mark = loader.querySelector<HTMLElement>(".loader__mark")!;
   const weber = loader.querySelector<HTMLElement>(".loader__weber")!;
   const studio = loader.querySelector<HTMLElement>(".loader__studio")!;
-  const m = document.querySelector<HTMLElement>(".intro__m")!;
-  const w = document.querySelector<HTMLElement>(".intro__w")!;
-  const s = document.querySelector<HTMLElement>(".intro__s")!;
+  const m = document.querySelector<HTMLElement>(".loader__m")!;
+  const w = document.querySelector<HTMLElement>(".loader__w")!;
+  const s = document.querySelector<HTMLElement>(".loader__s")!;
   const years = document.querySelector<HTMLElement>(".loader__years");
 
   const getXDistance = (element: HTMLElement, target: HTMLElement): number => {

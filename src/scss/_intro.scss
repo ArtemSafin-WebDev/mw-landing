@@ -12,13 +12,6 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s, visibility 0s linear 0.2s;
-
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   inset: 0;
-  //   background-color: rgba(black, 0.5);
-  // }
 }
 
 .intro__bg-item {
@@ -208,6 +201,48 @@
   }
 }
 
+.intro__s {
+  grid-column: 11 / -1;
+  grid-row: 3 / 4;
+  align-self: flex-end;
+  justify-self: flex-end;
+  font-size: 20rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 90%;
+  letter-spacing: -1rem;
+  margin-right: -0.5rem;
+  margin-bottom: -1.5rem;
+
+  @include breakpointMF(small-tablet) {
+    transition: opacity 0.2s, visibility 0.2s;
+  }
+
+  @include breakpoint(laptop) {
+    font-size: 12.7083rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 90%;
+    letter-spacing: -0.6354rem;
+    margin: 0;
+    margin-right: -0.5rem;
+    margin-bottom: -0.9rem;
+  }
+
+  @include breakpoint(mobile) {
+    margin: 0;
+    font-size: 12rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 90%;
+    letter-spacing: -0.6rem;
+    grid-row: 4 / 5;
+    grid-column: 3 / -1;
+    align-self: flex-end;
+    justify-self: flex-end;
+  }
+}
+
 .intro__project {
   font-size: 20rem;
   font-style: normal;
@@ -256,48 +291,6 @@
     justify-self: flex-start;
     margin-bottom: -1rem;
     display: none;
-  }
-}
-
-.intro__s {
-  grid-column: 11 / -1;
-  grid-row: 3 / 4;
-  align-self: flex-end;
-  justify-self: flex-end;
-  font-size: 20rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 90%;
-  letter-spacing: -1rem;
-  margin-right: -0.5rem;
-  margin-bottom: -1.5rem;
-
-  @include breakpointMF(small-tablet) {
-    transition: opacity 0.2s, visibility 0.2s;
-  }
-
-  @include breakpoint(laptop) {
-    font-size: 12.7083rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 90%;
-    letter-spacing: -0.6354rem;
-    margin: 0;
-    margin-right: -0.5rem;
-    margin-bottom: -0.9rem;
-  }
-
-  @include breakpoint(mobile) {
-    margin: 0;
-    font-size: 12rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 90%;
-    letter-spacing: -0.6rem;
-    grid-row: 4 / 5;
-    grid-column: 3 / -1;
-    align-self: flex-end;
-    justify-self: flex-end;
   }
 }
 

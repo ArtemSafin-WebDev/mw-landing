@@ -33,9 +33,6 @@
   @include breakpoint(mobile) {
     position: relative;
     z-index: 80;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s, visibility 0s linear 0.4s;
 
     .menu-open & {
       opacity: 1;

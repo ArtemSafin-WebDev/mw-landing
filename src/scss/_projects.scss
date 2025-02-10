@@ -3,14 +3,27 @@
   margin-bottom: 35rem;
   padding-top: 25rem;
 
+  &--archive {
+    padding-top: 50rem;
+    margin-bottom: 0;
+  }
+
   @include breakpoint(laptop) {
     margin-bottom: 22rem;
     padding-top: 16rem;
+    &--archive {
+      padding-top: 50rem;
+      margin-bottom: 0;
+    }
   }
 
   @include breakpoint(mobile) {
     margin-bottom: 14rem;
     padding-top: 14rem;
+    &--archive {
+      padding-top: 34rem;
+      margin-bottom: 0;
+    }
   }
 }
 

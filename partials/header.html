@@ -1,6 +1,7 @@
 <header class="page-header">
     <div class="page-header__content">
-        <a href="#" class="page-header__logo page-header__logo--hidden-on-start">
+        <a href="#"
+            class="page-header__logo {{#unless headerBtnsVisible}} page-header__logo--hidden-on-start {{/unless}}">
             <img src="/images/mw-logo.svg" alt="" class="page-header__logo-image">
             <img src="/images/mw-logo-white.svg" alt="" class="page-header__logo-image">
         </a>
@@ -76,7 +77,8 @@
                 </a>
             </div>
         </div>
-        <a href="#" class="page-header__callback-btn page-header__callback-btn--hidden-on-start">
+        <a href="#"
+            class="page-header__callback-btn {{#unless headerBtnsVisible}} page-header__callback-btn--hidden-on-start {{/unless}}">
             Начать проект
         </a>
         <button class="page-header__burger">

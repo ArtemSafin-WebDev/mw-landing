@@ -679,6 +679,7 @@
   position: relative;
   backface-visibility: hidden;
   overflow: hidden;
+  overflow: clip;
 }
 
 .stories__modal-slider-card-media-card-image {
@@ -691,6 +692,8 @@
   -webkit-user-drag: none;
   user-select: none;
   transform: scale(1.05);
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .stories__modal-slider-card-media-overlay {
@@ -698,7 +701,8 @@
   inset: 0;
   pointer-events: none;
   z-index: 1;
-
+  backface-visibility: hidden;
+  transform: translateZ(0);
   &::after {
     content: "";
     padding-bottom: 21.47%;
@@ -722,6 +726,8 @@
   position: relative;
   display: grid;
   pointer-events: none;
+  backface-visibility: hidden;
+  transform: translateZ(0);
   &:has(.stories__modal-slider-card-text-content) {
     &::before {
       content: "";
@@ -739,6 +745,8 @@
       pointer-events: none;
       z-index: 1;
       width: auto;
+      backface-visibility: hidden;
+      transform: translateZ(0);
 
       @include breakpoint(laptop) {
         margin: -1.27rem;
@@ -757,10 +765,12 @@
       content: "";
       position: absolute;
       inset: 0;
-      z-index: 2;
+      z-index: 54;
       background-color: rgba(black, 0.8);
       transition: opacity 0.4s;
       opacity: 0;
+      backface-visibility: hidden;
+      transform: translateZ(0);
     }
     .swiper-slide:not(.swiper-slide-active) & {
       &::after {
@@ -850,7 +860,9 @@
   align-self: flex-end;
   justify-self: stretch;
   padding-top: 8.2rem;
-  z-index: 2;
+  z-index: 10;
+  backface-visibility: hidden;
+  transform: translateZ(0);
   @include breakpoint(laptop) {
     padding-top: 4rem;
   }
@@ -904,7 +916,8 @@
   padding-top: 8.2rem;
   z-index: 2;
   justify-content: flex-end;
-
+  backface-visibility: hidden;
+  transform: translateZ(0);
   @include breakpoint(laptop) {
     padding-top: 4rem;
     gap: 0.5rem;

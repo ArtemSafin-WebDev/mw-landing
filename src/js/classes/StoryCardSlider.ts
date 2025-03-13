@@ -2,6 +2,7 @@ import Swiper from "swiper";
 import { SwiperOptions } from "swiper/types";
 import { EffectFade } from "swiper/modules";
 import gsap from "gsap";
+import { getVideoDuration } from "../utils";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -16,6 +17,7 @@ export default class StoryCardSlider {
   private pauseTimer: any = null;
   private longPress = false;
   private sliderOnHold = true;
+  private videoAbortController: AbortController | null = null;
 
   private options: SwiperOptions = {
     speed: 400,
@@ -67,27 +69,27 @@ export default class StoryCardSlider {
     this.card?.addEventListener("pointerup", this.play);
     this.container?.addEventListener("click", this.handleSideClick);
 
-    console.log("Stories slider created");
-
     document.addEventListener("storymodal:open", () => {
       this.sliderOnHold = false;
       if (this.instance) this.runSlider(this.instance);
     });
     document.addEventListener("storymodal:close", () => {
       this.sliderOnHold = true;
-      this.pauseSlider();
+      this.pauseSliderOnClose();
     });
   }
 
-  private pauseSlider = () => {
+  private pauseSliderOnClose = () => {
     this.autoplayTween?.kill();
-    if (this.instance) this.pauseCurrentVideo(this.instance);
+    if (this.instance) this.pauseVideo(this.instance);
   };
 
-  private runSlider = (swiper: Swiper) => {
+  private runSlider = async (swiper: Swiper) => {
+    if (typeof swiper?.realIndex === "undefined") return;
     this.setPaginationBullets(swiper.realIndex);
-    const duration = this.getCurrentSlideDuration(swiper);
+    const duration = await this.getCurrentSlideDuration(swiper);
     this.autoplay(swiper.realIndex, duration);
+    this.stopVideos();
     this.playVideo(swiper);
   };
 
@@ -102,35 +104,100 @@ export default class StoryCardSlider {
 
   private playVideo = (swiper: Swiper) => {
     const activeSlide = this.slides[swiper.realIndex];
-    this.stopVideos();
+
     const video = activeSlide?.querySelector<HTMLVideoElement>("video");
-    video?.play();
-    console.log("Video is playing");
+
+    if (this.videoAbortController) {
+      this.videoAbortController.abort();
+      this.videoAbortController = null;
+    }
+
+    this.videoAbortController = new AbortController();
+    const signal = this.videoAbortController.signal;
+
+    if (video) {
+      this.autoplayTween?.pause();
+
+      if (video.readyState >= 4) {
+        this.autoplayTween?.play();
+      } else {
+        video.addEventListener(
+          "canplaythrough",
+          () => {
+            this.autoplayTween?.play();
+          },
+          { once: true }
+        );
+      }
+
+      video.addEventListener(
+        "paused",
+        () => {
+          console.log("Video paused");
+          this.autoplayTween?.pause();
+        },
+        {
+          signal,
+        }
+      );
+      video.addEventListener(
+        "waiting",
+        () => {
+          console.log("Video waiting");
+          this.autoplayTween?.pause();
+        },
+        {
+          signal,
+        }
+      );
+      video.addEventListener(
+        "playing",
+        () => {
+          console.log("Video playing");
+          this.autoplayTween?.play();
+        },
+        {
+          signal,
+        }
+      );
+
+      video.play();
+    }
   };
 
-  private pauseCurrentVideo = (swiper: Swiper) => {
+  private pauseVideo = (swiper: Swiper) => {
     const activeSlide = this.slides[swiper.realIndex];
     const video = activeSlide?.querySelector<HTMLVideoElement>("video");
     video?.pause();
   };
-  private playCurrentVideo = (swiper: Swiper) => {
-    const activeSlide = this.slides[swiper.realIndex];
-    const video = activeSlide?.querySelector<HTMLVideoElement>("video");
-    video?.play();
-  };
 
-  private getCurrentSlideDuration = (swiper: Swiper) => {
+  private getCurrentSlideDuration = async (swiper: Swiper) => {
     const index = swiper.realIndex;
     const slides = this.slides;
     const nextSlide = slides[index];
+
     const card = nextSlide.querySelector<HTMLElement>(
       ".stories__modal-slider-card-media-card"
     );
-    if (!card?.hasAttribute("data-stories-duration")) return this.DURATION;
-    const cardDuration = Number(card.getAttribute("data-stories-duration"));
 
-    console.log("Index", index, cardDuration);
-    return cardDuration;
+    if (card?.hasAttribute("data-stories-duration")) {
+      const cardDuration = Number(card.getAttribute("data-stories-duration"));
+      return cardDuration;
+    }
+
+    const video = nextSlide.querySelector<HTMLVideoElement>("video");
+    if (video) {
+      try {
+        const videoDuration = await getVideoDuration(video);
+        console.log("Video duration", videoDuration);
+        return videoDuration.seconds;
+      } catch (err) {
+        console.error(err);
+        return this.DURATION;
+      }
+    }
+
+    return this.DURATION;
   };
 
   private setPaginationBullets = (index: number) => {
@@ -159,14 +226,14 @@ export default class StoryCardSlider {
     this.pauseTimer = setTimeout(() => {
       this.longPress = true;
       this.autoplayTween?.pause();
-      if (this.instance) this.pauseCurrentVideo(this.instance);
+      if (this.instance) this.pauseVideo(this.instance);
     }, 300);
   };
 
   private play = () => {
     if (this.pauseTimer) clearTimeout(this.pauseTimer);
     if (this.autoplayTween?.paused) this.autoplayTween?.play();
-    if (this.instance) this.playCurrentVideo(this.instance);
+    if (this.instance) this.playVideo(this.instance);
   };
 
   private handleSideClick = (event: MouseEvent) => {
@@ -176,15 +243,21 @@ export default class StoryCardSlider {
       return;
     }
 
-    console.log("Clicked");
     const rect = this.container.getBoundingClientRect();
     const x = event.pageX - rect.left;
+    const slidesCount = this.instance?.slides?.length;
     if (x > rect.width / 2) {
-      console.log("Clicked right");
-      this.instance?.slideNext();
+      if (slidesCount && slidesCount > 1) {
+        this.instance?.slideNext();
+      } else {
+        if (this.instance) this.runSlider(this.instance);
+      }
     } else {
-      console.log("Clicked left");
-      this.instance?.slidePrev();
+      if (slidesCount && slidesCount > 1) {
+        this.instance?.slidePrev();
+      } else {
+        if (this.instance) this.runSlider(this.instance);
+      }
     }
   };
 
@@ -203,7 +276,5 @@ export default class StoryCardSlider {
     this.bullets.forEach((bullet) => {
       bullet.classList.remove("active");
     });
-
-    console.log("Slides instance destroyed");
   };
 }

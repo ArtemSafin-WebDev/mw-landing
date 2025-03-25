@@ -7,6 +7,7 @@ export default function intro() {
   const elements = Array.from(document.querySelectorAll<HTMLElement>(".intro"));
 
   elements.forEach((element) => {
+    let mm = gsap.matchMedia();
     const introBtn = element.querySelector<HTMLLinkElement>(".intro__btn");
     const bgItems = Array.from(
       element.querySelectorAll<HTMLElement>(".intro__bg-item")
@@ -52,5 +53,36 @@ export default function intro() {
       timer?.kill();
       timer = null;
     });
+
+    mm.add(
+      "(min-width: 641px)",
+      () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: element,
+            start: "top top",
+            end: "bottom top",
+            markers: false,
+            scrub: true,
+          },
+        });
+
+        tl.addLabel("parallaxStart");
+        tl.to(".intro__parallax-layer", {
+          yPercent: 50,
+          duration: 1,
+          ease: "none",
+        });
+        tl.to(
+          ".intro__content",
+          {
+            scale: 0.95,
+            duration: 1,
+          },
+          "parallaxStart"
+        );
+      },
+      element
+    );
   });
 }

@@ -30,6 +30,12 @@
   line-height: 100%;
   letter-spacing: -0.32rem;
   margin-bottom: 11rem;
+  overflow: hidden;
+  overflow: clip;
+
+  span {
+    display: block;
+  }
 
   @include breakpoint(laptop) {
     font-size: 5rem;

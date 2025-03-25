@@ -9,6 +9,7 @@ import projects from "./projects";
 import intro from "./intro";
 import smoothScrolling from "./smoothScrolling";
 import header from "./header";
+import headingAnimation from "./headingAnimation";
 
 document.addEventListener("DOMContentLoaded", () => {
   smoothScrolling();
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   aboutUs();
   projects();
   intro();
+  headingAnimation();
   loader();
 });
 

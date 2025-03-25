@@ -216,10 +216,23 @@
   display: grid;
   align-self: flex-end;
   justify-self: flex-start;
+  position: relative;
 
   & > span {
     grid-column: 1 / 1;
     grid-row: 1 / 1;
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      background-color: currentColor;
+      transition: transform 0.2s;
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
     &:nth-child(2) {
       clip-path: inset(100% 0 0 0);
       color: white;
@@ -230,7 +243,9 @@
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      color: var(--primary-color);
+      & > span::before {
+        transform: scaleX(1);
+      }
     }
   }
 

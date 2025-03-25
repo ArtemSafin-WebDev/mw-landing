@@ -53,7 +53,7 @@
   grid-row: 1 / 2;
   align-self: flex-start;
   justify-self: flex-start;
-  margin-left: -1rem;
+  margin-left: -1.45rem;
   margin-top: -1.5rem;
 
   @include breakpointMF(small-tablet) {
@@ -138,7 +138,7 @@
   font-weight: 400;
   line-height: 90%;
   letter-spacing: -1rem;
-  margin-right: -0.5rem;
+  margin-right: 0rem;
   margin-bottom: -1.5rem;
 
   @include breakpointMF(small-tablet) {
@@ -214,7 +214,7 @@
   grid-row: 1 / 2;
   align-self: flex-start;
   justify-self: flex-start;
-  margin-left: -1rem;
+  margin-left: -1.45rem;
   margin-top: -1.5rem;
 
   @include breakpoint(laptop) {

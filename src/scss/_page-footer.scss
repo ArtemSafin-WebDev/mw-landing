@@ -156,10 +156,25 @@
   font-weight: 600;
   line-height: 2.4rem;
   letter-spacing: -0.06rem;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transition: transform 0.2s;
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      color: var(--primary-color);
+      &::before {
+        transform: scaleX(1);
+      }
     }
   }
 
@@ -189,9 +204,25 @@
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
   justify-self: flex-end;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transition: transform 0.2s;
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      color: var(--primary-color);
+      &::before {
+        transform: scaleX(1);
+      }
     }
   }
 

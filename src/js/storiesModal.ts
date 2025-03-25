@@ -2,7 +2,6 @@ import Swiper from "swiper";
 import StoryCardSlider from "./classes/StoryCardSlider";
 import { EffectFade } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/effect-fade";
 
 export default function storiesModal() {
   const mql = window.matchMedia("(max-width: 640px)");
@@ -15,8 +14,10 @@ export default function storiesModal() {
   const cards = Array.from(
     document.querySelectorAll<HTMLElement>(".stories__slider-card")
   );
-  const closeBtn = storiesModal?.querySelector<HTMLButtonElement>(
-    ".stories__modal-close"
+  const closeBtns = Array.from(
+    storiesModal.querySelectorAll<HTMLElement>(
+      ".stories__modal-close, .stories__modal-close-area"
+    )
   );
   if (!container) return;
   const slides = Array.from(
@@ -50,7 +51,12 @@ export default function storiesModal() {
         init: false,
         effect: "fade",
         modules: [EffectFade],
-        allowTouchMove: false,
+        // effect: "cube",
+        cubeEffect: {
+          shadow: false,
+        },
+        longSwipesRatio: 0.2,
+        allowTouchMove: true,
         fadeEffect: {
           crossFade: true,
         },
@@ -114,12 +120,14 @@ export default function storiesModal() {
 
   handleWidthChange(mql);
 
-  closeBtn?.addEventListener("click", (event) => {
-    event.preventDefault();
-    storiesModal.classList.remove("active");
-    document.body.classList.remove("modal-open");
-    document.dispatchEvent(new CustomEvent("storymodal:close"));
-  });
+  closeBtns.forEach((closeBtn) =>
+    closeBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      storiesModal.classList.remove("active");
+      document.body.classList.remove("modal-open");
+      document.dispatchEvent(new CustomEvent("storymodal:close"));
+    })
+  );
 
   cards.forEach((card) => {
     const id = card.getAttribute("data-story-id");

@@ -1,4 +1,7 @@
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function intro() {
   const elements = Array.from(document.querySelectorAll<HTMLElement>(".intro"));
@@ -13,6 +16,7 @@ export default function intro() {
     );
 
     let activeIndex = 0;
+    let prevIndex = 0;
 
     const length = bgItems.length;
     const cycle = () => {
@@ -32,6 +36,8 @@ export default function intro() {
       bgItems[index]?.classList.add("active");
       nameItems[index]?.classList.add("active");
 
+      prevIndex = index;
+
       timer?.kill();
       timer = gsap.delayedCall(1.5, () => {
         setActive(cycle());
@@ -39,7 +45,7 @@ export default function intro() {
     };
 
     introBtn?.addEventListener("mouseenter", () => {
-      setActive(cycle());
+      setActive(prevIndex);
     });
 
     introBtn?.addEventListener("mouseleave", () => {

@@ -12,6 +12,7 @@ import header from "./header";
 import headingAnimation from "./headingAnimation";
 import forms from "./forms";
 import mobileCallback from "./mobileCallback";
+import fancybox from "./fancybox";
 
 document.addEventListener("DOMContentLoaded", () => {
   smoothScrolling();
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   headingAnimation();
   forms();
   mobileCallback();
+  fancybox();
   loader();
 });
 

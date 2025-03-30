@@ -37,18 +37,20 @@ export default function forms() {
                 form.classList.add("form-sent")
               );
             }
-            setTimeout(() => {
-              if (!document.startViewTransition) {
-                form.classList.remove("form-sent");
-              } else {
-                document.startViewTransition(() =>
-                  form.classList.remove("form-sent")
-                );
-              }
-            }, 4000);
+            form.reset();
+            // setTimeout(() => {
+            //   if (!document.startViewTransition) {
+            //     form.classList.remove("form-sent");
+            //   } else {
+            //     document.startViewTransition(() =>
+            //       form.classList.remove("form-sent")
+            //     );
+            //   }
+            // }, 4000);
           })
           .catch((err) => {
             console.error(err);
+            window.alert("Не удалось отправить форму");
           })
           .finally(() => {
             if (submitBtn) submitBtn.disabled = false;

@@ -23,6 +23,7 @@
     "vite-plugin-svg-icons": "^2.0.1"
   },
   "dependencies": {
+    "@fancyapps/ui": "^5.0.36",
     "@studio-freight/lenis": "^1.0.42",
     "@types/dom-view-transitions": "^1.0.6",
     "axios": "^1.8.4",

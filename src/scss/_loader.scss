@@ -174,7 +174,7 @@
   }
 }
 
-.loader__years {
+.loader__percentage {
   font-size: 2rem;
   font-style: normal;
   font-weight: 400;
@@ -184,6 +184,7 @@
   grid-column: 1 / 3;
   align-self: flex-end;
   justify-self: flex-start;
+  white-space: nowrap;
 
   @include breakpoint(laptop) {
     font-size: 1.6rem;

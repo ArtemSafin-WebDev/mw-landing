@@ -14,7 +14,6 @@ export default function loader() {
   const m = document.querySelector<HTMLElement>(".loader__m")!;
   const w = document.querySelector<HTMLElement>(".loader__w")!;
   const s = document.querySelector<HTMLElement>(".loader__s")!;
-  const years = document.querySelector<HTMLElement>(".loader__years");
 
   const getXDistance = (element: HTMLElement, target: HTMLElement): number => {
     const elementRect = element.getBoundingClientRect();
@@ -27,10 +26,12 @@ export default function loader() {
     const tl = gsap.timeline();
 
     tl.to(
-      years,
+      ".loader__percentage span",
       {
-        autoAlpha: 0,
-        duration: 1,
+        duration: 2.4,
+        textContent: 100,
+        ease: "none",
+        snap: { textContent: 1 },
       },
       0
     );
@@ -61,7 +62,7 @@ export default function loader() {
         ease: "power2.inOut",
       },
       0
-    ).addLabel("afterMove");
+    );
 
     tl.to(
       ".loader__word span:not(:first-child)",
@@ -72,13 +73,17 @@ export default function loader() {
         scale: 0,
         xPercent: -100,
       },
-      "afterMove"
+      ">"
     );
 
-    tl.to(".loader", {
-      autoAlpha: 0,
-      duration: 0.6,
-    }).add(() => {
+    tl.to(
+      ".loader",
+      {
+        autoAlpha: 0,
+        duration: 0.6,
+      },
+      ">"
+    ).add(() => {
       loader.remove();
       document.dispatchEvent(new CustomEvent("loader:hidden"));
       window.sessionStorage.setItem("loaderShown", "Y");

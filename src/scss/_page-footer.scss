@@ -74,7 +74,8 @@
   @include breakpoint(mobile) {
     padding: 2rem 0;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-row-gap: 6rem;
+    grid-row-gap: 3rem;
+    padding-bottom: 10rem;
   }
 }
 

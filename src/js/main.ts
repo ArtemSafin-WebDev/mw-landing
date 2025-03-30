@@ -11,6 +11,7 @@ import smoothScrolling from "./smoothScrolling";
 import header from "./header";
 import headingAnimation from "./headingAnimation";
 import forms from "./forms";
+import mobileCallback from "./mobileCallback";
 
 document.addEventListener("DOMContentLoaded", () => {
   smoothScrolling();
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   intro();
   headingAnimation();
   forms();
+  mobileCallback();
   loader();
 });
 

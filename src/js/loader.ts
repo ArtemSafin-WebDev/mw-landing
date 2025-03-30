@@ -6,6 +6,7 @@ gsap.registerPlugin(Flip);
 export default function loader() {
   const loader = document.querySelector<HTMLElement>(".loader");
   if (!loader) return;
+  if (window.sessionStorage.getItem("loaderShown") === "Y") return;
 
   const mark = loader.querySelector<HTMLElement>(".loader__mark")!;
   const weber = loader.querySelector<HTMLElement>(".loader__weber")!;
@@ -80,6 +81,7 @@ export default function loader() {
     }).add(() => {
       loader.remove();
       document.dispatchEvent(new CustomEvent("loader:hidden"));
+      window.sessionStorage.setItem("loaderShown", "Y");
     });
 
     tl.from(

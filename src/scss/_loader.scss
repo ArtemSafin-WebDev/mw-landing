@@ -8,6 +8,10 @@
   color: white;
   @include blockWrapper;
   z-index: 100;
+
+  .loader-already-shown & {
+    display: none !important;
+  }
 }
 
 .loader__content,

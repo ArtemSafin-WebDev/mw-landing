@@ -3,6 +3,10 @@
         history.scrollRestoration = "manual";
     }
 
+    if (window.sessionStorage.getItem('loaderShown') === 'Y') {
+        document.body.classList.add('loader-already-shown')
+    }
+
 </script>
 <div class="loader">
     <div class="loader__content">

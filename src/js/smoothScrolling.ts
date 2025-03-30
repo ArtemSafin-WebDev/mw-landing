@@ -18,8 +18,10 @@ export default function smoothScrolling() {
       smoothWheel: true,
     });
 
-    lenis.on("scroll", ScrollTrigger.update);
-    lenis.stop();
+    if (window.sessionStorage.getItem("loaderShown") !== "Y") {
+      lenis.on("scroll", ScrollTrigger.update);
+      lenis.stop();
+    }
 
     document.addEventListener("loader:hidden", () => {
       lenis?.start();

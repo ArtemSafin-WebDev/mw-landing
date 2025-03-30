@@ -63,10 +63,13 @@ export default function loader() {
     ).addLabel("afterMove");
 
     tl.to(
-      ".loader__word span",
+      ".loader__word span:not(:first-child)",
       {
-        clipPath: "inset(0 100% 0 0)",
-        duration: 0.5,
+        autoAlpha: 0,
+        stagger: -0.15,
+        duration: 0.3,
+        scale: 0,
+        xPercent: -100,
       },
       "afterMove"
     );

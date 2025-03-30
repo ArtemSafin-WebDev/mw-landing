@@ -336,3 +336,10 @@
     letter-spacing: -0.6rem;
   }
 }
+
+.loader__word {
+  white-space: nowrap;
+}
+.loader__word span {
+  display: inline-block;
+}

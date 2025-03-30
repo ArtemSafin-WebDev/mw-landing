@@ -6,6 +6,7 @@
   @include blockWrapper;
   pointer-events: none;
   z-index: 10;
+  view-transition-name: header;
 }
 
 .page-header__content {
@@ -30,6 +31,7 @@
   align-items: flex-start;
   justify-items: flex-start;
   grid-template-areas: "stack";
+  pointer-events: all;
   @include breakpoint(mobile) {
     position: relative;
     z-index: 80;
@@ -73,14 +75,6 @@
   @include breakpoint(mobile) {
     width: 4.2rem;
   }
-}
-
-.page-header__logo-image:nth-child(2) {
-  // position: absolute;
-  // left: 0;
-  // top: 0;
-  // width: 100%;
-  // height: auto;
 }
 
 .page-header__studio {
@@ -535,6 +529,12 @@
   &:link,
   &:visited {
     color: var(--text-color);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--primary-color-hover);
+    }
   }
 
   @include breakpoint(mobile) {

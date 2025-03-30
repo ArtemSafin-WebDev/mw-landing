@@ -10,6 +10,7 @@ import intro from "./intro";
 import smoothScrolling from "./smoothScrolling";
 import header from "./header";
 import headingAnimation from "./headingAnimation";
+import forms from "./forms";
 
 document.addEventListener("DOMContentLoaded", () => {
   smoothScrolling();
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   projects();
   intro();
   headingAnimation();
+  forms();
   loader();
 });
 

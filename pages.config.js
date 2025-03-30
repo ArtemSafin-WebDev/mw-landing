@@ -1,11 +1,13 @@
 import home from "./pages-data/home";
 import project from "./pages-data/project";
 import projects from "./pages-data/projects";
+import startProject from "./pages-data/startProject";
 
 const pagesConfig = {
   ...home,
   ...projects,
   ...project,
+  ...startProject,
 };
 
 export default pagesConfig;

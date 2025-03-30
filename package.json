@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@studio-freight/lenis": "^1.0.42",
+    "axios": "^1.8.4",
     "gsap": "^3.12.5",
     "inputmask": "^5.0.8",
     "lodash": "^4.17.21",

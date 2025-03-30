@@ -1,5 +1,6 @@
 .page-footer {
   @include blockWrapper;
+  view-transition-name: footer;
 }
 
 .page-footer__content {
@@ -9,6 +10,10 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto 1fr auto;
+
+  .page-footer--compact & {
+    min-height: auto !important;
+  }
 
   @media (orientation: landscape) and (min-width: 641px) {
     min-height: 100vh;
@@ -29,6 +34,10 @@
   margin-top: -0.499rem;
   grid-column: 1 / -1;
   grid-row: 1 / 4;
+
+  .page-footer--compact & {
+    display: none;
+  }
 
   @include breakpoint(laptop) {
     margin-top: -0.288rem;

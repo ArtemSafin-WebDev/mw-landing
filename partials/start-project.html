@@ -1,23 +1,156 @@
 <section class="start-project">
   <div class="start-project__content">
-    <div class="start-project__top">
-      <h1 class="start-project__heading">Начать проект</h1>
-    </div>
-    <div class="start-project__bottom">
-      <div class="start-project__text">Свяжитесь с нами, чтобы начать.</div>
-      <div class="start-project__no-tz">
-        Не требуем детального ТЗ и предлагаем решения сами.
-      </div>
-      <form action="/" method="POST" class="start-project__form">
-        <div class="start-project__form-fields">
-          <div class="start-project__form-field">
-            <label class="start-project__form-label">
-              <span class="start-project__form-label-text">
-                Что бы вы хотели?
-              </span>
-              <input type="text" class="start-project__form-input" />
-            </label>
+    <div class="start-project__row">
+      <div class="start-project__contacts">
+        <h3 class="start-project__contacts-heading">
+          Контакты
+        </h3>
+        <div class="start-project__contacts-info">
+          <div class="start-project__blocks">
+            <div class="start-project__block">
+              <a href="tel:+79178858213" class="start-project__contacts-link">
+                +7 917 885-82-13
+              </a>
+              <a href="mailto:info@markweber.ru" class="start-project__contacts-link">
+                info@markweber.ru
+              </a>
+            </div>
+            <div class="start-project__block">
+              <a href="#" class="start-project__contacts-link">
+                Telegram
+              </a>
+              <a href="#" class="start-project__contacts-link">
+                WhatsApp
+              </a>
+            </div>
+            <div class="start-project__block">
+              Бурхана Шахиди, 9-А,<br>
+              Казань, Россия,<br> 420014
+            </div>
           </div>
+        </div>
+      </div>
+      <form action="/" method="POST" class="start-project__form js-form">
+        <div class="start-project__form-default-layer">
+          <div class="start-project__form-fields">
+            <div class="start-project__form-field">
+              <h3 class="start-project__form-field-title">
+                Что вас интересует
+              </h3>
+              <div class="start-project__checkboxes">
+                <label class="start-project__checkbox">
+                  <input type="radio" name="interest" value="Сайт" class="start-project__checkbox-input">
+                  <span class="start-project__checkbox-content">
+                    Сайт
+                  </span>
+                </label>
+                <label class="start-project__checkbox">
+                  <input type="radio" name="interest" value="Веб-сервис" class="start-project__checkbox-input">
+                  <span class="start-project__checkbox-content">
+                    Веб-сервис
+                  </span>
+                </label>
+                <label class="start-project__checkbox">
+                  <input type="radio" name="interest" value="Приложение" class="start-project__checkbox-input">
+                  <span class="start-project__checkbox-content">
+                    Приложение
+                  </span>
+                </label>
+                <label class="start-project__checkbox">
+                  <input type="radio" name="interest" value="Интернет-магазин" class="start-project__checkbox-input">
+                  <span class="start-project__checkbox-content">
+                    Интернет-магазин
+                  </span>
+                </label>
+                <label class="start-project__checkbox">
+                  <input type="radio" name="interest" value="Другое" class="start-project__checkbox-input">
+                  <span class="start-project__checkbox-content">
+                    Другое
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="start-project__form-field">
+              <h3 class="start-project__form-field-title">
+                Опишите кратко задачу
+              </h3>
+              <div class="start-project__input-wrapper">
+                <textarea name="comment" class="start-project__input" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="start-project__form-field">
+              <h3 class="start-project__form-field-title">
+                Откуда вы о нас узнали?
+              </h3>
+              <div class="start-project__checkboxes">
+                <label class="start-project__checkbox">
+                  <input type="radio" name="from" value="Рейтинги" class="start-project__checkbox-input">
+                  <span class="start-project__checkbox-content">
+                    Рейтинги
+                  </span>
+                </label>
+                <label class="start-project__checkbox">
+                  <input type="radio" name="from" value="Рекомендации" class="start-project__checkbox-input">
+                  <span class="start-project__checkbox-content">
+                    Рекомендации
+                  </span>
+                </label>
+                <label class="start-project__checkbox">
+                  <input type="radio" name="from" value="Работы" class="start-project__checkbox-input">
+                  <span class="start-project__checkbox-content">
+                    Работы
+                  </span>
+                </label>
+                <label class="start-project__checkbox">
+                  <input type="radio" name="from" value="СМИ" class="start-project__checkbox-input">
+                  <span class="start-project__checkbox-content">
+                    СМИ
+                  </span>
+                </label>
+                <label class="start-project__checkbox">
+                  <input type="radio" name="from" value="Соцсети" class="start-project__checkbox-input">
+                  <span class="start-project__checkbox-content">
+                    Соцсети
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="start-project__form-field">
+              <h3 class="start-project__form-field-title">
+                Как вас зовут
+              </h3>
+              <div class="start-project__input-wrapper">
+                <input type="text" class="start-project__input" required="" name="your-name">
+              </div>
+            </div>
+            <div class="start-project__form-field">
+              <h3 class="start-project__form-field-title">
+                Телефон
+              </h3>
+              <div class="start-project__input-wrapper">
+                <input type="tel" class="start-project__input" required="" name="your-phone">
+              </div>
+            </div>
+            <div class="start-project__form-field">
+              <h3 class="start-project__form-field-title">
+                Эл. почта
+              </h3>
+              <div class="start-project__input-wrapper">
+                <input type="email" class="start-project__input" required="" name="your-email">
+              </div>
+            </div>
+          </div>
+          <div class="start-project__form-controls">
+            <button class="start-project__form-submit" type="submit">
+              Отправить
+            </button>
+            <div class="start-project__form-policy">
+              Нажимая кнопку «отправить», вы даете согласие на обработку персональных данных
+            </div>
+          </div>
+        </div>
+        <div class="start-project__form-success-layer">
+          Заявка успешно отправлена
         </div>
       </form>
     </div>

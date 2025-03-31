@@ -17,8 +17,8 @@
   padding: 3rem 0;
 
   @media (orientation: landscape) and (min-width: 641px) {
-    min-height: 100vh;
-    min-height: 100svh;
+    min-height: 90vh;
+    min-height: 90svh;
   }
 
   @include breakpoint(mobile) {

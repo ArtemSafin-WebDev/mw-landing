@@ -89,7 +89,7 @@ export default function storiesModal() {
         speed: 600,
         spaceBetween: 10,
         init: false,
-        slideToClickedSlide: true,
+
         on: {
           init: (swiper) => {
             initCardSlider(swiper);
@@ -202,13 +202,32 @@ export default function storiesModal() {
     document.querySelectorAll<HTMLElement>(".stories__modal-slider-card-text")
   );
   texts.forEach((text) => {
-    text.addEventListener("click", () => {
+    text.addEventListener("click", (event) => {
+      if (!window.matchMedia("(max-width: 640px)").matches) return;
+      event.preventDefault();
+      event.stopPropagation();
+
       text.classList.toggle("shown");
     });
+
+    document.addEventListener("click", (event) => {
+      if (!text.classList.contains("shown")) return;
+      const target = event.target as HTMLElement;
+
+      if (
+        target.matches(".stories__modal-slider-card-text") ||
+        target.closest(".stories__modal-slider-card-text")
+      )
+        return;
+      text.classList.remove("shown");
+    });
+
     text.addEventListener("mouseenter", () => {
+      if (window.matchMedia("(max-width: 640px)").matches) return;
       text.classList.add("shown");
     });
     text.addEventListener("mouseleave", () => {
+      if (window.matchMedia("(max-width: 640px)").matches) return;
       text.classList.remove("shown");
     });
   });

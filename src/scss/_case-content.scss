@@ -29,6 +29,8 @@
   background: var(--btn-bg-color, #7e577f);
   color: var(--btn-text-color, white);
   margin-top: 30rem;
+  position: relative;
+  overflow: hidden;
 
   @include breakpoint(mobile) {
     padding: 0.8rem 1.3rem;
@@ -45,6 +47,21 @@
   &:visited {
     color: var(--btn-text-color, white);
   }
+
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    text-align: center;
+    transition: transform 0.3s ease;
+    transform: translateY(0);
+  }
+
+  &:hover::after {
+    transform: translateY(-100%);
+  }
 }
 
 .case-content__website-link-icon {
@@ -52,6 +69,8 @@
   height: 2.4rem;
   object-fit: contain;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 
   @include breakpoint(mobile) {
     width: 1.4983rem;

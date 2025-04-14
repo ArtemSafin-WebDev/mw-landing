@@ -28,6 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
   mobileCallback();
   fancybox();
   loader();
+  // Prevent default behavior for buttons inside swiper slides
+  document.querySelectorAll(".swiper-slide button").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+  });
 });
 
 window.addEventListener("load", () => {

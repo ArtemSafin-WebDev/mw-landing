@@ -216,6 +216,8 @@ export default class StoryCardSlider {
         ease: "linear",
         onComplete: () => {
           this.instance?.slideNext();
+          if (this.instance?.isEnd)
+            document.dispatchEvent(new CustomEvent("storyslider:end"));
         },
       }
     );
@@ -247,12 +249,16 @@ export default class StoryCardSlider {
     const x = event.pageX - rect.left;
     const slidesCount = this.instance?.slides?.length;
     if (x > rect.width / 2) {
+      if (this.instance?.isEnd)
+        document.dispatchEvent(new CustomEvent("storyslider:end"));
       if (slidesCount && slidesCount > 1) {
         this.instance?.slideNext();
       } else {
         if (this.instance) this.runSlider(this.instance);
       }
     } else {
+      if (this.instance?.isBeginning)
+        document.dispatchEvent(new CustomEvent("storyslider:start"));
       if (slidesCount && slidesCount > 1) {
         this.instance?.slidePrev();
       } else {

@@ -41,6 +41,8 @@ export default function storiesModal() {
     cardSliders.push(cardSlider);
   }
   let activeIndex = 0;
+  let preventClickNavigation = false;
+
   const handleWidthChange = (e: MediaQueryListEvent | MediaQueryList) => {
     if (e.matches) {
       if (instance) instance.destroy();
@@ -56,7 +58,7 @@ export default function storiesModal() {
           shadow: false,
         },
         longSwipesRatio: 0.2,
-        allowTouchMove: true,
+        allowTouchMove: false,
         fadeEffect: {
           crossFade: true,
         },
@@ -87,6 +89,7 @@ export default function storiesModal() {
         speed: 600,
         spaceBetween: 10,
         init: false,
+        slideToClickedSlide: true,
         on: {
           init: (swiper) => {
             initCardSlider(swiper);
@@ -108,17 +111,48 @@ export default function storiesModal() {
     }
   };
 
+  mql.addEventListener("change", handleWidthChange);
+
+  handleWidthChange(mql);
+
+  document.addEventListener("storyslider:end", () => {
+    console.log("Storysliderned", instance?.isEnd);
+    preventClickNavigation = true;
+    const handleTransitionEnd = () => {
+      preventClickNavigation = false;
+      instance?.off("slideChangeTransitionEnd", handleTransitionEnd);
+    };
+    instance?.on("slideChangeTransitionEnd", handleTransitionEnd);
+    if (instance?.isEnd) {
+      instance.slideTo(0);
+    } else {
+      instance?.slideNext();
+    }
+  });
+  document.addEventListener("storyslider:start", () => {
+    console.log("Storysliderstart", instance?.isBeginning);
+    preventClickNavigation = true;
+    const handleTransitionEnd = () => {
+      preventClickNavigation = false;
+      instance?.off("slideChangeTransitionEnd", handleTransitionEnd);
+    };
+    instance?.on("slideChangeTransitionEnd", handleTransitionEnd);
+    if (instance?.isBeginning) {
+      instance.slideTo(instance.slides.length - 1);
+    } else {
+      instance?.slidePrev();
+    }
+  });
+
   slides.forEach((slide, slideIndex) => {
     slide.addEventListener("click", () => {
-      if (slideIndex === activeIndex) return;
+      console.log("Equals", slideIndex, instance?.activeIndex);
+      if (slideIndex === instance?.activeIndex) return;
+      if (preventClickNavigation) return;
       instance?.slideTo(slideIndex);
       console.log("Sliding to", slideIndex);
     });
   });
-
-  mql.addEventListener("change", handleWidthChange);
-
-  handleWidthChange(mql);
 
   closeBtns.forEach((closeBtn) =>
     closeBtn.addEventListener("click", (event) => {

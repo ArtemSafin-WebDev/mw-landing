@@ -108,14 +108,6 @@
     transition: opacity 0.2s, visibility 0.2s;
   }
 
-  @include breakpoint(laptop) {
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
-    letter-spacing: -0.048rem;
-  }
-
   @include breakpoint(mobile) {
     display: none;
   }
@@ -180,9 +172,6 @@
   gap: 2rem;
   row-gap: 1rem;
 
-  @include breakpoint(laptop) {
-    gap: 1.27rem;
-  }
   @include breakpoint(mobile) {
     flex-direction: column;
     flex-wrap: nowrap;
@@ -239,14 +228,6 @@
     }
   }
 
-  @include breakpoint(laptop) {
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
-    letter-spacing: -0.048rem;
-  }
-
   @include breakpoint(mobile) {
     font-size: 2.4rem;
     font-style: normal;
@@ -292,10 +273,6 @@
     }
   }
 
-  @include breakpoint(laptop) {
-    gap: 0.5rem;
-  }
-
   @include breakpoint(mobile) {
     width: 100%;
     gap: 1rem;
@@ -312,10 +289,6 @@
     content: "";
     display: block;
     padding-bottom: 62%;
-  }
-
-  @include breakpoint(laptop) {
-    border-radius: 0.3026rem;
   }
 
   @include breakpoint(mobile) {
@@ -350,13 +323,6 @@
   font-weight: 600;
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
-  @include breakpoint(laptop) {
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
-    letter-spacing: -0.064rem;
-  }
 
   @include breakpoint(mobile) {
     font-size: 1.6rem;
@@ -376,14 +342,6 @@
   color: #878787;
   letter-spacing: -0.06rem;
 
-  @include breakpoint(laptop) {
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
-    letter-spacing: -0.048rem;
-  }
-
   @include breakpoint(mobile) {
     font-size: 1.6rem;
     font-style: normal;
@@ -401,14 +359,6 @@
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
   text-align: right;
-
-  @include breakpoint(laptop) {
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
-    letter-spacing: -0.064rem;
-  }
 
   @include breakpoint(mobile) {
     font-size: 1.6rem;

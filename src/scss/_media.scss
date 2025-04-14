@@ -7,10 +7,6 @@
     @media only screen and (max-width: (1400px)) {
       @content;
     }
-  } @else if $class == laptop {
-    @media only screen and (max-width: (1220px)) {
-      @content;
-    }
   } @else if $class == tablet {
     @media only screen and (max-width: (1024px)) {
       @content;
@@ -41,10 +37,6 @@
     }
   } @else if $class == desktop {
     @media only screen and (min-width: 1201px) {
-      @content;
-    }
-  } @else if $class == laptop {
-    @media only screen and (min-width: 1025px) {
       @content;
     }
   } @else if $class == tablet {

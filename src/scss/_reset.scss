@@ -16,9 +16,6 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 4rem;
 
-  @include breakpoint(laptop) {
-    font-size: clamp(2px, 0.62vw, 125px);
-  }
   @include breakpoint(mobile) {
     font-size: 10px;
   }

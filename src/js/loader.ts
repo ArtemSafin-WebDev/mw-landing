@@ -68,10 +68,9 @@ export default function loader() {
       ".loader__word span:not(:first-child)",
       {
         autoAlpha: 0,
-        stagger: -0.15,
+        stagger: -0.1,
         duration: 0.3,
-        scale: 0,
-        xPercent: -100,
+        xPercent: -30,
       },
       ">"
     );

@@ -13,6 +13,7 @@ import headingAnimation from "./headingAnimation";
 import forms from "./forms";
 import mobileCallback from "./mobileCallback";
 import fancybox from "./fancybox";
+import services from "./services";
 
 document.addEventListener("DOMContentLoaded", () => {
   smoothScrolling();
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   forms();
   mobileCallback();
   fancybox();
+  services();
   loader();
   // Prevent default behavior for buttons inside swiper slides
   document.querySelectorAll(".swiper-slide button").forEach((button) => {

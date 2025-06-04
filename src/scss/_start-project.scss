@@ -182,7 +182,6 @@
   background: #212121;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
 }
 
 .start-project__form-submit {
@@ -225,6 +224,11 @@
   line-height: 2rem;
   letter-spacing: -0.048rem;
   color: #bababa;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  cursor: pointer;
+  margin-top: 3rem;
 
   @include breakpoint(mobile) {
     font-size: 1.6rem;
@@ -232,6 +236,38 @@
     font-weight: 400;
     line-height: 2rem;
     letter-spacing: -0.048rem;
+  }
+}
+
+.start-project__form-policy-input {
+  display: none;
+}
+
+.start-project__form-policy-mark {
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid white;
+  margin-top: 0.2rem;
+
+  &::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background-color: currentColor;
+    transform: scale(0);
+    transition: transform 0.2s;
+    background-color: white;
+  }
+
+  .start-project__form-policy-input:checked ~ & {
+    &::before {
+      transform: scale(1);
+    }
   }
 }
 

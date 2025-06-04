@@ -1,9 +1,9 @@
 import "virtual:svg-icons-register";
 import "../scss/style.scss";
-import storiesBlockSlider from "./storiesBlockSlider";
+// import storiesBlockSlider from "./storiesBlockSlider";
 import menu from "./menu";
 import loader from "./loader";
-import storiesModal from "./storiesModal";
+// import storiesModal from "./storiesModal";
 import aboutUs from "./aboutUs";
 import projects from "./projects";
 import intro from "./intro";
@@ -18,9 +18,9 @@ import services from "./services";
 document.addEventListener("DOMContentLoaded", () => {
   smoothScrolling();
   header();
-  storiesBlockSlider();
+  // storiesBlockSlider();
   menu();
-  storiesModal();
+  // storiesModal();
   aboutUs();
   projects();
   intro();

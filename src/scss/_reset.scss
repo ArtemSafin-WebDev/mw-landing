@@ -42,7 +42,7 @@ body.modal-open {
 }
 
 @include breakpointMF(small-tablet) {
-  body:has(.loader) {
+  body:has(.loader):not(.loader-already-shown) {
     touch-action: none;
     -webkit-overflow-scrolling: none;
     overflow: hidden;

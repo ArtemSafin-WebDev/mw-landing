@@ -150,10 +150,6 @@
       visibility: inherit;
       transition: opacity 0.4s, visibility 0.4s;
     }
-
-    body:not(.loaded) & {
-      display: none;
-    }
   }
 }
 

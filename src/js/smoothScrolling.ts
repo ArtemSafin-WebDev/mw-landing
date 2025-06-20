@@ -13,7 +13,7 @@ export default function smoothScrolling() {
 
   let lenis: Lenis | null = null;
 
-  if (!isTouch()) {
+  if (!isTouch() || false) {
     lenis = new Lenis({
       smoothWheel: true,
     });

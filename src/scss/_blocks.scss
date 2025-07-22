@@ -22,8 +22,15 @@
 }
 
 .narrow-image {
-  margin: 3rem 0;
-  margin-bottom: 3rem;
+  margin: 20rem 0;
+
+  &:has(+ .narrow-image) {
+    margin-bottom: 3rem;
+  }
+
+  & + .narrow-image {
+    margin-top: 3rem;
+  }
 
   @include breakpointMF(small-tablet) {
     display: grid;

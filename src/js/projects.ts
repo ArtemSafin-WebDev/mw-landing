@@ -24,11 +24,27 @@ export default function projects() {
       });
 
       tl.from(card, {
-        // clipPath: "inset(0 100% 0 0)",
         autoAlpha: 0,
         duration: 1,
       });
     });
-    gsap.context(() => {}, element);
+
+    const filtersBtn = element.querySelector<HTMLButtonElement>(
+      ".projects__categories-btn"
+    );
+    filtersBtn?.addEventListener("click", (event) => {
+      event.preventDefault();
+      filtersBtn.nextElementSibling?.classList.toggle("active");
+    });
+
+    document.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        target.matches(".projects__categories") ||
+        target.closest(".projects__categories")
+      )
+        return;
+      filtersBtn?.nextElementSibling?.classList.remove("active");
+    });
   });
 }

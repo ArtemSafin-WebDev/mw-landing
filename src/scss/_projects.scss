@@ -4,7 +4,7 @@
   padding-top: 25rem;
 
   &--archive {
-    padding-top: 0;
+    padding-top: 40rem;
     margin-bottom: 0;
   }
 
@@ -12,36 +12,9 @@
     margin-bottom: 14rem;
     padding-top: 14rem;
     &--archive {
-      padding-top: 0;
+      padding-top: 30rem;
       margin-bottom: 0;
     }
-  }
-}
-
-.projects__title-wrapper {
-  display: grid;
-  place-items: center;
-  min-height: 60rem;
-  padding: 2rem;
-
-  @include breakpoint(mobile) {
-    min-height: 30rem;
-  }
-}
-
-.projects__title {
-  font-size: 8rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 100%;
-  letter-spacing: -0.32rem;
-
-  @include breakpoint(mobile) {
-    font-size: 4rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 100%;
-    letter-spacing: -0.16rem;
   }
 }
 
@@ -532,5 +505,13 @@
     line-height: 2rem;
     letter-spacing: -0.048rem;
     padding: 1.6rem 2rem;
+  }
+}
+
+.projects__tab {
+  display: none;
+  flex-direction: column;
+  &.active {
+    display: flex;
   }
 }

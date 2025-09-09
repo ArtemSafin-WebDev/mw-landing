@@ -58,6 +58,9 @@ export default function projects() {
       const links = Array.from(
         element.querySelectorAll<HTMLLinkElement>(".projects__categories-link")
       );
+      const btnTextElement = element.querySelector<HTMLElement>(
+        ".projects__categories-btn-text"
+      );
 
       const setActiveLink = (link: HTMLLinkElement) => {
         if (currentCategoryBtn) currentCategoryBtn.href = link.href;
@@ -66,6 +69,12 @@ export default function projects() {
         link.classList.add("active");
         tabs.forEach((tab) => tab.classList.remove("active"));
         tabs[linkIndex]?.classList.add("active");
+        const linkTextElement = link.querySelector(
+          ".projects__categories-link-text"
+        );
+        if (btnTextElement && linkTextElement) {
+          btnTextElement.textContent = linkTextElement.textContent;
+        }
         ScrollTrigger.refresh();
       };
 

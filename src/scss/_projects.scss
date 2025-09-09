@@ -78,9 +78,7 @@
     line-height: 2rem;
     letter-spacing: -0.032rem;
     font-family: var(--inter-display);
-    .projects--archive & {
-      display: none;
-    }
+    display: none;
   }
 }
 
@@ -106,10 +104,8 @@
   grid-column: 7 / 12;
 
   @include breakpoint(mobile) {
-    .projects--archive & {
-      position: relative;
-      order: -1;
-    }
+    position: relative;
+    order: -1;
   }
 }
 

@@ -49,9 +49,9 @@ export default function projects() {
     });
 
     if (element.matches(".projects:not(.projects--archive)")) {
-      const currentCategoryBtn = element.querySelector<HTMLLinkElement>(
-        ".projects__all-link"
-      );
+      // const currentCategoryBtn = element.querySelector<HTMLLinkElement>(
+      //   ".projects__all-link"
+      // );
       const tabs = Array.from(
         element.querySelectorAll<HTMLElement>(".projects__tab")
       );
@@ -63,7 +63,7 @@ export default function projects() {
       );
 
       const setActiveLink = (link: HTMLLinkElement) => {
-        if (currentCategoryBtn) currentCategoryBtn.href = link.href;
+        // if (currentCategoryBtn) currentCategoryBtn.href = link.href;
         const linkIndex = links.indexOf(link);
         links.forEach((link) => link.classList.remove("active"));
         link.classList.add("active");

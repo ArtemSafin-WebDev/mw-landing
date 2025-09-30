@@ -283,7 +283,7 @@
     display: block;
   }
 
-  & * {
+  & > * {
     grid-column: 2 / 3;
   }
 

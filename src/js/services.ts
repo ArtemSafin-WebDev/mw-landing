@@ -1,34 +1,52 @@
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function services() {
-  const elements = Array.from(document.querySelectorAll(".services"));
+    const elements = Array.from(document.querySelectorAll(".services"));
 
-  elements.forEach((element) => {
-    const accordions = Array.from(
-      element.querySelectorAll(".services__services-accordion")
-    );
-    accordions.forEach((accordion) => {
-      const btn = accordion.querySelector<HTMLButtonElement>(
-        ".services__services-accordion-btn"
-      );
-      const dropdown = accordion.querySelector<HTMLDivElement>(
-        ".services__services-accordion-dropdown"
-      );
+    elements.forEach((element) => {
+        const accordions = Array.from(
+            element.querySelectorAll(".services__services-accordion")
+        );
+        accordions.forEach((accordion) => {
+            const btn = accordion.querySelector<HTMLButtonElement>(
+                ".services__services-accordion-btn"
+            );
+            const dropdown = accordion.querySelector<HTMLDivElement>(
+                ".services__services-accordion-dropdown"
+            );
 
-      dropdown?.addEventListener("transitionend", () => {
-        ScrollTrigger.refresh();
-      });
-      btn?.addEventListener("click", (event) => {
-        event.preventDefault();
-        accordions.forEach((someAccordion) => {
-          if (someAccordion === accordion) return;
-          someAccordion.classList.remove("active");
+            dropdown?.addEventListener("transitionend", () => {
+                ScrollTrigger.refresh();
+            });
+            btn?.addEventListener("click", (event) => {
+                event.preventDefault();
+                accordions.forEach((someAccordion) => {
+                    if (someAccordion === accordion) return;
+                    someAccordion.classList.remove("active");
+                    const video = someAccordion.querySelector<HTMLVideoElement>("video");
+                    if (!video) return;
+                    video.pause();
+                    video.currentTime = 0;
+                });
+                const video = accordion.querySelector<HTMLVideoElement>("video");
+                const isActive = accordion.classList.contains("active");
+                if (isActive) {
+                    accordion.classList.remove("active");
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                } else {
+                    accordion.classList.add("active");
+                    if (video) {
+                        video.currentTime = 0;
+                        video.play();
+                    }
+                }
+            });
         });
-        accordion.classList.toggle("active");
-      });
     });
-  });
 }

@@ -241,7 +241,6 @@
   }
 }
 
-
 .services__subcategories-list {
   margin-top: 6rem;
   display: grid;
@@ -256,9 +255,9 @@
   }
 
   .services__subcategories-list {
-    margin-top: .8rem;
+    margin-top: 0.8rem;
     grid-template-columns: minmax(0, 1fr);
-    grid-gap: .8rem;
+    grid-gap: 0.8rem;
     padding-left: 3.2rem;
 
     @include breakpoint(mobile) {
@@ -282,16 +281,19 @@
   }
 }
 
-
 .services__subcategories-link {
   font-size: 2rem;
   line-height: 2.4rem;
   letter-spacing: -3%;
-  background-image: linear-gradient(to right, var(--text-color) 0%, var(--text-color) 100%);
+  background-image: linear-gradient(
+    to right,
+    var(--text-color) 0%,
+    var(--text-color) 100%
+  );
   background-position: 0% 100%;
   background-repeat: no-repeat;
   background-size: 0% 1px;
-  transition: background-size 0.25s ease-out, color .25s;
+  transition: background-size 0.25s ease-out, color 0.25s;
 
   @include breakpoint(mobile) {
     font-size: 1.6rem;
@@ -304,7 +306,6 @@
       background-size: 100% 1px;
     }
   }
-
 }
 
 .services__showreel-wrapper {
@@ -332,7 +333,7 @@
   display: block;
   grid-column: 3 / 5;
   pointer-events: auto;
-  transition: opacity .4s, visibility 0s linear .4s;
+  transition: opacity 0.4s, visibility 0s linear 0.4s;
   opacity: 0;
   visibility: hidden;
 
@@ -341,10 +342,11 @@
     visibility: inherit;
   }
 
-  .services__services-accordion.active & {
+  .services__services-accordion.active &,
+  .video-shown & {
     opacity: 1;
     visibility: inherit;
-    transition: opacity .4s, visibility .4s;
+    transition: opacity 0.4s, visibility 0.4s;
   }
 
   & > * {

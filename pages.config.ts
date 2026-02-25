@@ -3,6 +3,7 @@ import project from "./pages-data/project";
 import projects from "./pages-data/projects";
 import startProject from "./pages-data/startProject";
 import services from "./pages-data/services";
+import service from "./pages-data/service";
 
 
 type PagesConfig = {
@@ -15,6 +16,7 @@ const pagesConfig: PagesConfig = {
   ...project,
   ...startProject,
   ...services,
+  ...service,
 };
 
 export default pagesConfig;

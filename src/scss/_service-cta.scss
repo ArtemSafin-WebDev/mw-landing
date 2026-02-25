@@ -1,0 +1,214 @@
+.service-cta {
+  @include blockWrapper;
+  background: #212121;
+  color: white;
+  padding-top: 10.4rem;
+  padding-bottom: 10.4rem;
+}
+
+.service-cta__content {
+  @include blockContent;
+}
+
+.service-cta__row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-gap: var(--column-gap);
+  align-items: flex-start;
+}
+
+.service-cta__heading {
+  font-size: 6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: -0.24rem;
+  text-wrap: balance;
+  grid-column: 1 / 7;
+}
+
+.service-cta__form {
+  grid-column: 7 / 11;
+}
+
+.service-cta__form-default-layer {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  .form-sent & {
+    display: none;
+  }
+}
+
+.service-cta__form-success-layer {
+  display: none;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -0.16rem;
+
+  .form-sent & {
+    display: block;
+  }
+}
+
+.service-cta__form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.service-cta__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.service-cta__form-field-title {
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4rem;
+  letter-spacing: -0.08rem;
+}
+
+.service-cta__input {
+  border-radius: 0.5rem;
+  background: #3c3c3c;
+  height: 5.2rem;
+  padding: 0 1.5rem;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.4rem;
+  letter-spacing: -0.06rem;
+  color: white;
+  border: 1px solid transparent;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+
+  &::placeholder {
+    color: #bababa;
+  }
+
+  &.not-valid {
+    border-color: #f60a18;
+  }
+
+  &:hover:not(:focus):not(.not-valid) {
+    border-color: #515151;
+  }
+
+  &:not(.not-valid):focus {
+    border-color: #6f6f6f;
+  }
+}
+
+.service-cta__input--textarea {
+  height: auto;
+  min-height: 11.4rem;
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+  resize: none;
+}
+
+.service-cta__form-controls {
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background: #191919;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cta__form-submit {
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  padding: 1.6rem 9.1rem;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2rem;
+  letter-spacing: -0.048rem;
+  border-radius: 4rem;
+  background: var(--primary-color);
+  align-self: flex-start;
+  color: var(--text-color);
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--primary-color-hover);
+    }
+  }
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
+    letter-spacing: -0.048rem;
+    align-self: stretch;
+    text-align: center;
+    padding: 1.6rem 3.2rem;
+    justify-content: center;
+  }
+}
+
+.service-cta__form-policy {
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem;
+  letter-spacing: -0.048rem;
+  color: #bababa;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  cursor: pointer;
+  margin-top: 3rem;
+
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2rem;
+    letter-spacing: -0.048rem;
+  }
+}
+
+.service-cta__form-policy-input {
+  display: none;
+}
+
+.service-cta__form-policy-mark {
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid white;
+  margin-top: 0.2rem;
+
+  &::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background-color: currentColor;
+    transform: scale(0);
+    transition: transform 0.2s;
+    background-color: white;
+  }
+
+  .service-cta__form-policy-input:checked ~ & {
+    &::before {
+      transform: scale(1);
+    }
+  }
+}

@@ -6,9 +6,13 @@
 
 .service-clients__content {
   @include blockContent;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-gap: var(--column-gap);
 }
 
 .service-clients__heading {
+  grid-column: 1 / -1;
   font-size: 2rem;
   font-style: normal;
   font-weight: 600;
@@ -17,17 +21,31 @@
   margin-bottom: 2.4rem;
 }
 
+.service-clients__marquee {
+  grid-column: 1 / -1;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+
+  &.is-dragging {
+    cursor: grabbing;
+  }
+}
+
 .service-clients__cards {
   display: flex;
   gap: 2rem;
-
   align-items: flex-start;
+  width: max-content;
+  will-change: transform;
 }
 
 .service-clients__card {
   background-color: #f2f2f2;
   aspect-ratio: 283 / 180;
   position: relative;
+  flex: 0 0 auto;
   width: 28.3rem;
   &--square {
     aspect-ratio: 1;
@@ -45,4 +63,5 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  pointer-events: none;
 }

@@ -14,6 +14,7 @@ import forms from "./forms";
 import mobileCallback from "./mobileCallback";
 import fancybox from "./fancybox";
 import services from "./services";
+import serviceClients from "./serviceClients";
 
 document.addEventListener("DOMContentLoaded", () => {
   smoothScrolling();
@@ -29,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   mobileCallback();
   fancybox();
   services();
+  serviceClients();
   loader();
   // Prevent default behavior for buttons inside swiper slides
   document.querySelectorAll(".swiper-slide button").forEach((button) => {

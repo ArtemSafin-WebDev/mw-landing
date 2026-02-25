@@ -19,17 +19,19 @@
   letter-spacing: -0.08rem;
   position: sticky;
   top: 10rem;
+  align-self: start;
 }
 
 .service-steps__list {
   display: flex;
   flex-direction: column;
+  padding-bottom: calc(4 * var(--step));
 }
 
 .service-steps__list-item {
   border-top: 1px solid #d4d4d4;
   position: sticky;
-
+  z-index: var(--n, 1);
   top: calc(var(--n, 1) * var(--step));
   &::before {
     display: none;

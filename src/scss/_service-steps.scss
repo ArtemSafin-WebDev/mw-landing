@@ -25,11 +25,6 @@
 .service-steps__list {
   display: flex;
   flex-direction: column;
-  &::after {
-    content: "";
-    height: calc(4 * var(--step));
-    flex-shrink: 0;
-  }
 }
 
 .service-steps__list-item {

@@ -1,0 +1,8 @@
+.service-clients {
+  @include blockWrapper;
+  margin-bottom: 30rem;
+}
+
+.service-clients__content {
+  @include blockContent;
+}

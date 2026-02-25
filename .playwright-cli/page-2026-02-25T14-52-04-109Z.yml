@@ -1,0 +1,131 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: 0%
+      - generic [ref=e5]:
+        - generic [ref=e6]: M
+        - generic [ref=e7]: a
+        - generic [ref=e8]: r
+        - generic [ref=e9]: k
+      - generic [ref=e10]:
+        - generic [ref=e11]: W
+        - generic [ref=e12]: e
+        - generic [ref=e13]: b
+        - generic [ref=e14]: e
+        - generic [ref=e15]: r
+      - generic [ref=e16]:
+        - generic [ref=e17]: S
+        - generic [ref=e18]: t
+        - generic [ref=e19]: u
+        - generic [ref=e20]: d
+        - generic [ref=e21]: i
+        - generic [ref=e22]: o
+    - generic [ref=e23]:
+      - generic [ref=e24]: M
+      - generic [ref=e25]: W
+      - generic [ref=e26]: S
+  - banner:
+    - generic:
+      - link [ref=e27] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e28]:
+        - generic [ref=e29]: Mark Weber Studio
+        - generic: Mark Weber Studio
+      - generic:
+        - navigation:
+          - list:
+            - listitem:
+              - link "Проекты" [ref=e30] [cursor=pointer]:
+                - /url: projects.html
+                - generic [ref=e31]: Проекты
+                - generic: Проекты
+            - listitem:
+              - link "О нас" [ref=e32] [cursor=pointer]:
+                - /url: "#about"
+                - generic [ref=e33]: О нас
+                - generic: О нас
+            - listitem:
+              - link "Контакты" [ref=e34] [cursor=pointer]:
+                - /url: "#contacts"
+                - generic [ref=e35]: Контакты
+                - generic: Контакты
+        - link "Начать проект" [ref=e36] [cursor=pointer]:
+          - /url: start-project.html
+  - main [ref=e37]:
+    - generic [ref=e39]:
+      - heading "Стек разработки" [level=2] [ref=e40]
+      - list [ref=e41]:
+        - listitem [ref=e42]: PHP
+        - listitem [ref=e43]: Nuxt.JS
+        - listitem [ref=e44]: JavaScript
+        - listitem [ref=e45]: Wordpress
+        - listitem [ref=e46]: 1C-Bitrix
+        - listitem [ref=e47]: Tilda
+        - listitem [ref=e48]: Laravel
+        - listitem [ref=e49]: Shopify
+        - listitem [ref=e50]: Vue.JS
+    - generic [ref=e52]:
+      - heading "Отрасли и решения" [level=2] [ref=e53]
+      - list [ref=e55]:
+        - listitem [ref=e56]:
+          - generic [ref=e57]:
+            - heading "Недвижимость и девелопмент" [level=3] [ref=e58]
+            - generic [ref=e59]: Каталоги на тысячи позиций, кабинеты дилеров, тендерные разделы, интеграция с ERP
+        - listitem [ref=e60]:
+          - generic [ref=e61]:
+            - heading "Медиа и СМИ" [level=3] [ref=e62]
+            - generic [ref=e63]: Каталоги на тысячи позиций, кабинеты дилеров, тендерные разделы, интеграция с ERP
+        - listitem [ref=e64]:
+          - generic [ref=e65]:
+            - heading "Производство и B2B" [level=3] [ref=e66]
+            - generic [ref=e67]: Каталоги на тысячи позиций, кабинеты дилеров, тендерные разделы, интеграция с ERP
+        - listitem [ref=e68]:
+          - generic [ref=e69]:
+            - heading "Интернет-магазины и маркетплейсы" [level=3] [ref=e70]
+            - generic [ref=e71]: От Tilda до кастомных решений на Shopify.
+        - listitem [ref=e72]:
+          - generic [ref=e73]:
+            - heading "Финансы и страхование" [level=3] [ref=e74]
+            - generic [ref=e75]: Сайты банков и страховых компаний, личные кабинеты, калькуляторы, соответствие 152-ФЗ.
+    - generic [ref=e78]:
+      - heading "Обсудить проект для вашей компании" [level=1] [ref=e79]:
+        - text: Обсудить проект
+        - text: для вашей компании
+      - generic [ref=e81]:
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - heading "Как вас зовут" [level=2] [ref=e84]
+            - textbox [ref=e86]
+          - generic [ref=e87]:
+            - heading "Телефон" [level=2] [ref=e88]
+            - textbox [ref=e90]
+          - generic [ref=e91]:
+            - heading "Тема обращения" [level=2] [ref=e92]
+            - textbox [ref=e94]
+        - generic [ref=e95]:
+          - button "Отправить" [ref=e96] [cursor=pointer]
+          - generic [ref=e99] [cursor=pointer]: Нажимая кнопку «отправить», вы даете согласие на обработку персональных данных
+  - contentinfo [ref=e100]:
+    - generic [ref=e101]:
+      - link "Лого" [ref=e102] [cursor=pointer]:
+        - /url: /
+        - img "Лого" [ref=e103]
+      - generic [ref=e104]:
+        - generic [ref=e105]: MWA®
+        - generic [ref=e106]: ©2024
+        - list [ref=e107]:
+          - listitem [ref=e108]:
+            - link "Dprofile" [ref=e109] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e110]:
+            - link "Behance" [ref=e111] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e112]:
+            - link "Telegram" [ref=e113] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e114]:
+            - link "WhatsApp" [ref=e115] [cursor=pointer]:
+              - /url: "#"
+        - link "Cookie preferences" [ref=e116] [cursor=pointer]:
+          - /url: "#"
+  - img

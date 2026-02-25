@@ -1,0 +1,106 @@
+- generic [active] [ref=e1]:
+  - banner:
+    - generic:
+      - link [ref=e2] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e3]:
+        - generic [ref=e4]: Mark Weber Studio
+        - generic: Mark Weber Studio
+      - generic:
+        - navigation:
+          - list:
+            - listitem:
+              - link "Проекты" [ref=e5] [cursor=pointer]:
+                - /url: projects.html
+                - generic [ref=e6]: Проекты
+                - generic: Проекты
+            - listitem:
+              - link "О нас" [ref=e7] [cursor=pointer]:
+                - /url: "#about"
+                - generic [ref=e8]: О нас
+                - generic: О нас
+            - listitem:
+              - link "Контакты" [ref=e9] [cursor=pointer]:
+                - /url: "#contacts"
+                - generic [ref=e10]: Контакты
+                - generic: Контакты
+        - link "Начать проект" [ref=e11] [cursor=pointer]:
+          - /url: start-project.html
+  - main [ref=e12]:
+    - generic [ref=e14]:
+      - heading "Стек разработки" [level=2] [ref=e15]
+      - list [ref=e16]:
+        - listitem [ref=e17]: PHP
+        - listitem [ref=e18]: Nuxt.JS
+        - listitem [ref=e19]: JavaScript
+        - listitem [ref=e20]: Wordpress
+        - listitem [ref=e21]: 1C-Bitrix
+        - listitem [ref=e22]: Tilda
+        - listitem [ref=e23]: Laravel
+        - listitem [ref=e24]: Shopify
+        - listitem [ref=e25]: Vue.JS
+    - generic [ref=e27]:
+      - heading "Отрасли и решения" [level=2] [ref=e28]
+      - list [ref=e30]:
+        - listitem [ref=e31]:
+          - generic [ref=e32]:
+            - heading "Недвижимость и девелопмент" [level=3] [ref=e33]
+            - generic [ref=e34]: Каталоги на тысячи позиций, кабинеты дилеров, тендерные разделы, интеграция с ERP
+        - listitem [ref=e35]:
+          - generic [ref=e36]:
+            - heading "Медиа и СМИ" [level=3] [ref=e37]
+            - generic [ref=e38]: Каталоги на тысячи позиций, кабинеты дилеров, тендерные разделы, интеграция с ERP
+        - listitem [ref=e39]:
+          - generic [ref=e40]:
+            - heading "Производство и B2B" [level=3] [ref=e41]
+            - generic [ref=e42]: Каталоги на тысячи позиций, кабинеты дилеров, тендерные разделы, интеграция с ERP
+        - listitem [ref=e43]:
+          - generic [ref=e44]:
+            - heading "Интернет-магазины и маркетплейсы" [level=3] [ref=e45]
+            - generic [ref=e46]: От Tilda до кастомных решений на Shopify.
+        - listitem [ref=e47]:
+          - generic [ref=e48]:
+            - heading "Финансы и страхование" [level=3] [ref=e49]
+            - generic [ref=e50]: Сайты банков и страховых компаний, личные кабинеты, калькуляторы, соответствие 152-ФЗ.
+    - generic [ref=e53]:
+      - heading "Обсудить проект для вашей компании" [level=1] [ref=e54]:
+        - text: Обсудить проект
+        - text: для вашей компании
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - heading "Как вас зовут" [level=2] [ref=e59]
+            - textbox [ref=e61]
+          - generic [ref=e62]:
+            - heading "Телефон" [level=2] [ref=e63]
+            - textbox [ref=e65]
+          - generic [ref=e66]:
+            - heading "Тема обращения" [level=2] [ref=e67]
+            - textbox [ref=e69]
+        - generic [ref=e70]:
+          - button "Отправить" [ref=e71] [cursor=pointer]
+          - generic [ref=e74] [cursor=pointer]: Нажимая кнопку «отправить», вы даете согласие на обработку персональных данных
+  - contentinfo [ref=e75]:
+    - generic [ref=e76]:
+      - link "Лого" [ref=e77] [cursor=pointer]:
+        - /url: /
+        - img "Лого" [ref=e78]
+      - generic [ref=e79]:
+        - generic [ref=e80]: MWA®
+        - generic [ref=e81]: ©2024
+        - list [ref=e82]:
+          - listitem [ref=e83]:
+            - link "Dprofile" [ref=e84] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e85]:
+            - link "Behance" [ref=e86] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e87]:
+            - link "Telegram" [ref=e88] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e89]:
+            - link "WhatsApp" [ref=e90] [cursor=pointer]:
+              - /url: "#"
+        - link "Cookie preferences" [ref=e91] [cursor=pointer]:
+          - /url: "#"
+  - img

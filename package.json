@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
     "@types/inputmask": "^5.0.3",
@@ -16,6 +18,7 @@
     "@types/validator": "^13.11.1",
     "fast-glob": "^3.3.1",
     "glob": "^10.3.3",
+    "prettier": "^3.8.1",
     "sass": "^1.65.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",

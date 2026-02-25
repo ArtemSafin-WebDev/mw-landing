@@ -1,5 +1,5 @@
 const DRAG_THRESHOLD_PX = 8;
-const DEFAULT_SPEED_PX_PER_SECOND = 40;
+const DEFAULT_SPEED_PX_PER_SECOND = 100;
 
 type PointerState = {
   id: number;
@@ -13,6 +13,21 @@ function normalizeOffset(value: number, length: number) {
   if (length <= 0) return 0;
   const result = value % length;
   return result < 0 ? result + length : result;
+}
+
+function getTrackGap(track: HTMLElement) {
+  const styles = window.getComputedStyle(track);
+  const rawGap = styles.columnGap || styles.gap || "0";
+  const parsedGap = Number.parseFloat(rawGap);
+  return Number.isFinite(parsedGap) ? parsedGap : 0;
+}
+
+function getBaseLoopWidth(cards: HTMLElement[], track: HTMLElement) {
+  const cardsWidth = cards.reduce((sum, card) => sum + card.getBoundingClientRect().width, 0);
+  // Include the inter-set gap (between the last card of the current set
+  // and the first card of the next cloned set) for a seamless loop.
+  const gapWidth = getTrackGap(track) * Math.max(0, cards.length);
+  return cardsWidth + gapWidth;
 }
 
 function initMarquee(root: HTMLElement) {
@@ -31,9 +46,7 @@ function initMarquee(root: HTMLElement) {
       : DEFAULT_SPEED_PX_PER_SECOND;
   const speedPxPerMs = speedPxPerSecond / 1000;
 
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  );
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   let loopWidth = 0;
   let offset = 0;
@@ -65,13 +78,12 @@ function initMarquee(root: HTMLElement) {
   };
 
   const rebuildTrack = () => {
-    const progress =
-      loopWidth > 0 ? normalizeOffset(offset, loopWidth) / loopWidth : 0;
+    const progress = loopWidth > 0 ? normalizeOffset(offset, loopWidth) / loopWidth : 0;
 
     clearClones();
     track.style.transform = "translate3d(0, 0, 0)";
 
-    const baseWidth = track.scrollWidth;
+    const baseWidth = getBaseLoopWidth(originalCards, track);
     if (baseWidth <= 0) {
       loopWidth = 0;
       offset = 0;
@@ -79,10 +91,11 @@ function initMarquee(root: HTMLElement) {
     }
 
     loopWidth = baseWidth;
-    const minTrackWidth = Math.max(baseWidth * 2, baseWidth + root.clientWidth);
+    const rootWidth = root.getBoundingClientRect().width;
+    const minTrackWidth = Math.max(baseWidth * 2, baseWidth + rootWidth);
     let guard = 0;
 
-    while (track.scrollWidth < minTrackWidth && guard < 1000) {
+    while (track.getBoundingClientRect().width < minTrackWidth && guard < 1000) {
       originalCards.forEach((card) => {
         const clone = card.cloneNode(true) as HTMLElement;
         clone.setAttribute("data-service-clients-clone", "true");
@@ -110,10 +123,7 @@ function initMarquee(root: HTMLElement) {
 
   const tick = (timestamp: number) => {
     const canAnimate =
-      loopWidth > 0 &&
-      !prefersReducedMotion.matches &&
-      isInViewport &&
-      pointerState === null;
+      loopWidth > 0 && !prefersReducedMotion.matches && isInViewport && pointerState === null;
 
     if (canAnimate) {
       if (lastTimestamp === 0) {
@@ -138,7 +148,7 @@ function initMarquee(root: HTMLElement) {
       startX: event.clientX,
       startY: event.clientY,
       startOffset: offset,
-      dragging: false
+      dragging: false,
     };
     lastTimestamp = 0;
   });
@@ -181,7 +191,7 @@ function initMarquee(root: HTMLElement) {
         lastTimestamp = 0;
       },
       {
-        threshold: 0
+        threshold: 0,
       }
     );
     intersectionObserver.observe(root);
@@ -214,9 +224,7 @@ function initMarquee(root: HTMLElement) {
 }
 
 export default function serviceClients() {
-  const marquees = Array.from(
-    document.querySelectorAll<HTMLElement>("[data-service-clients]")
-  );
+  const marquees = Array.from(document.querySelectorAll<HTMLElement>("[data-service-clients]"));
 
   marquees.forEach((marquee) => {
     initMarquee(marquee);

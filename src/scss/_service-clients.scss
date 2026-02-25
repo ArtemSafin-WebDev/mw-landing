@@ -23,6 +23,9 @@
 
 .service-clients__marquee {
   grid-column: 1 / -1;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
   overflow: hidden;
   touch-action: pan-y;
   user-select: none;

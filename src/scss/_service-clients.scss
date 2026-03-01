@@ -1,24 +1,32 @@
 .service-clients {
   @include blockWrapper;
   margin-bottom: 30rem;
-  margin-top: 30rem;
+
+  @include breakpoint(mobile) {
+    margin-bottom: 16rem;
+  }
 }
 
 .service-clients__content {
   @include blockContent;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-gap: var(--column-gap);
 }
 
 .service-clients__heading {
-  grid-column: 1 / -1;
   font-size: 2rem;
   font-style: normal;
   font-weight: 600;
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
   margin-bottom: 2.4rem;
+
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.032rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .service-clients__marquee {
@@ -42,6 +50,10 @@
   align-items: flex-start;
   width: max-content;
   will-change: transform;
+
+  @include breakpoint(mobile) {
+    gap: 1rem;
+  }
 }
 
 .service-clients__card {
@@ -50,6 +62,10 @@
   position: relative;
   flex: 0 0 auto;
   width: 28.3rem;
+
+  @include breakpoint(mobile) {
+    width: 18rem;
+  }
   &--square {
     aspect-ratio: 1;
   }

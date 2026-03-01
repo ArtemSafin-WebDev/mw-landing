@@ -1,6 +1,7 @@
 const DRAG_THRESHOLD_PX = 8;
 const DEFAULT_SPEED_PX_PER_SECOND = 100;
 
+// Active pointer data while the user is dragging the marquee.
 type PointerState = {
   id: number;
   startX: number;
@@ -9,12 +10,14 @@ type PointerState = {
   dragging: boolean;
 };
 
+// Keep offset in [0, loopLength) so wrapping is mathematically seamless.
 function normalizeOffset(value: number, length: number) {
   if (length <= 0) return 0;
   const result = value % length;
   return result < 0 ? result + length : result;
 }
 
+// Read the current flex gap from computed styles.
 function getTrackGap(track: HTMLElement) {
   const styles = window.getComputedStyle(track);
   const rawGap = styles.columnGap || styles.gap || "0";
@@ -22,6 +25,7 @@ function getTrackGap(track: HTMLElement) {
   return Number.isFinite(parsedGap) ? parsedGap : 0;
 }
 
+// Compute one logical cycle width (original set only), including gap continuity.
 function getBaseLoopWidth(cards: HTMLElement[], track: HTMLElement) {
   const cardsWidth = cards.reduce((sum, card) => sum + card.getBoundingClientRect().width, 0);
   // Include the inter-set gap (between the last card of the current set
@@ -48,6 +52,8 @@ function initMarquee(root: HTMLElement) {
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+  // Width of one cycle before cloning, current offset inside the cycle,
+  // and lightweight runtime state for animation/observers.
   let loopWidth = 0;
   let offset = 0;
   let isInViewport = true;
@@ -58,6 +64,7 @@ function initMarquee(root: HTMLElement) {
   let intersectionObserver: IntersectionObserver | null = null;
   let resizeObserver: ResizeObserver | null = null;
 
+  // Debounced rebuild for resize/layout changes (1 recalculation per frame).
   const requestRebuild = () => {
     if (resizeFrameId) {
       window.cancelAnimationFrame(resizeFrameId);
@@ -67,16 +74,22 @@ function initMarquee(root: HTMLElement) {
     });
   };
 
+  // Render current offset to GPU-friendly transform.
   const applyTransform = () => {
     track.style.transform = `translate3d(${-offset}px, 0, 0)`;
   };
 
+  // Remove previously generated clones before rebuilding.
   const clearClones = () => {
     track
       .querySelectorAll<HTMLElement>("[data-service-clients-clone='true']")
       .forEach((clone) => clone.remove());
   };
 
+  // Build an infinitely scrolling track:
+  // 1) measure one "base" cycle,
+  // 2) append clones until content is long enough,
+  // 3) preserve previous progress ratio to avoid jumps after rebuild.
   const rebuildTrack = () => {
     const progress = loopWidth > 0 ? normalizeOffset(offset, loopWidth) / loopWidth : 0;
 
@@ -109,6 +122,7 @@ function initMarquee(root: HTMLElement) {
     applyTransform();
   };
 
+  // Unified drag end handler for pointerup/cancel/lostcapture.
   const onPointerEnd = (event: PointerEvent) => {
     if (!pointerState || pointerState.id !== event.pointerId) return;
 
@@ -121,6 +135,8 @@ function initMarquee(root: HTMLElement) {
     lastTimestamp = 0;
   };
 
+  // Main animation loop:
+  // move with constant px/s speed and wrap by loop width.
   const tick = (timestamp: number) => {
     const canAnimate =
       loopWidth > 0 && !prefersReducedMotion.matches && isInViewport && pointerState === null;
@@ -143,6 +159,7 @@ function initMarquee(root: HTMLElement) {
     if (event.pointerType === "mouse" && event.button !== 0) return;
     if (loopWidth <= 0) return;
 
+    // Remember drag start so pointermove can convert deltaX into new offset.
     pointerState = {
       id: event.pointerId,
       startX: event.clientX,
@@ -161,12 +178,14 @@ function initMarquee(root: HTMLElement) {
     const deltaY = event.clientY - pointerState.startY;
 
     if (!pointerState.dragging) {
+      // Ignore tiny moves and keep vertical page scrolling unaffected.
       if (Math.abs(deltaX) < DRAG_THRESHOLD_PX) return;
       if (Math.abs(deltaX) <= Math.abs(deltaY)) {
         pointerState = null;
         return;
       }
 
+      // Drag starts only for horizontal intent.
       pointerState.dragging = true;
       root.classList.add("is-dragging");
       root.setPointerCapture(event.pointerId);
@@ -184,6 +203,7 @@ function initMarquee(root: HTMLElement) {
   root.addEventListener("pointercancel", onPointerEnd);
   root.addEventListener("lostpointercapture", onPointerEnd);
 
+  // Pause work when section is offscreen.
   if ("IntersectionObserver" in window) {
     intersectionObserver = new IntersectionObserver(
       (entries) => {
@@ -197,6 +217,7 @@ function initMarquee(root: HTMLElement) {
     intersectionObserver.observe(root);
   }
 
+  // Rebuild when root/track geometry can change.
   if ("ResizeObserver" in window) {
     resizeObserver = new ResizeObserver(() => {
       requestRebuild();
@@ -205,9 +226,11 @@ function initMarquee(root: HTMLElement) {
   }
   window.addEventListener("resize", requestRebuild);
 
+  // Initial layout + animation start.
   rebuildTrack();
   frameId = window.requestAnimationFrame(tick);
 
+  // Cleanup runtime resources.
   window.addEventListener("unload", () => {
     window.cancelAnimationFrame(frameId);
     if (resizeFrameId) {

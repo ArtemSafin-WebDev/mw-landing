@@ -1,6 +1,10 @@
 .service-quote {
   @include blockWrapper;
   margin-bottom: 30rem;
+
+  @include breakpoint(mobile) {
+    margin-bottom: 16rem;
+  }
 }
 
 .service-quote__content {
@@ -10,12 +14,23 @@
   gap: 8rem;
   padding-top: 3rem;
   border-top: 1px solid #d4d4d4;
+
+  @include breakpoint(mobile) {
+    padding-top: 2rem;
+    gap: 4rem;
+  }
 }
 
 .service-quote__row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--column-gap);
+
+  @include breakpoint(mobile) {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
 
   & > svg {
     flex-shrink: 0;
@@ -24,6 +39,9 @@
     fill: black;
     align-self: flex-start;
     justify-self: flex-start;
+    @include breakpoint(mobile) {
+      display: none;
+    }
   }
 }
 
@@ -31,6 +49,10 @@
   display: flex;
   flex-direction: column;
   gap: 6rem;
+
+  @include breakpoint(mobile) {
+    gap: 4rem;
+  }
 }
 
 .service-quote__text {
@@ -39,6 +61,14 @@
   font-weight: 600;
   line-height: 120%;
   letter-spacing: -0.16rem;
+
+  @include breakpoint(mobile) {
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -0.096rem;
+  }
 }
 
 .service-quote__author {
@@ -53,6 +83,14 @@
   font-weight: 600;
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.032rem;
+    font-family: var(--inter-display);
+  }
 }
 
 .service-quote__author-position {
@@ -62,6 +100,15 @@
   line-height: 2rem;
   letter-spacing: -0.032rem;
   color: #878787;
+
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.032rem;
+    font-family: var(--inter-display);
+  }
 }
 
 .service-quote__image-wrapper {
@@ -70,6 +117,10 @@
   border-radius: 0.5rem;
   overflow: clip;
   aspect-ratio: 1800 / 805;
+
+  @include breakpoint(mobile) {
+    aspect-ratio: 335 / 300;
+  }
 }
 
 .service-quote__image {

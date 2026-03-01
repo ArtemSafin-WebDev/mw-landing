@@ -146,12 +146,16 @@
     position: absolute;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s, visibility 0s linear 0.4s;
+    transition:
+      opacity 0.4s,
+      visibility 0s linear 0.4s;
 
     &.active {
       opacity: 1;
       visibility: inherit;
-      transition: opacity 0.4s, visibility 0.4s;
+      transition:
+        opacity 0.4s,
+        visibility 0.4s;
     }
   }
 }
@@ -160,7 +164,8 @@
   @include breakpoint(mobile) {
     border-radius: 0.5rem;
     background: #fff;
-    box-shadow: 0 0 16.4rem 0 rgba(0, 0, 0, 0.15),
+    box-shadow:
+      0 0 16.4rem 0 rgba(0, 0, 0, 0.15),
       0 0 8rem 0 rgba(0, 0, 0, 0.25);
   }
 }
@@ -279,7 +284,9 @@
   border-radius: 4rem;
   background: #f2f2f2;
   color: var(--text-color);
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
   padding: 1.6rem;
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -301,7 +308,9 @@
   font-weight: 600;
   line-height: 2rem;
   letter-spacing: -0.048rem;
-  transition: color 0.2s, background-color 0.2s;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
   padding: 1.6rem 2rem;
   border-radius: 4rem;
   background: #f2f2f2;
@@ -441,6 +450,7 @@
   line-height: 2.4rem;
   color: #878787;
   letter-spacing: -0.06rem;
+
   @include breakpoint(mobile) {
     width: auto;
     font-size: 1.6rem;
@@ -484,7 +494,9 @@
   letter-spacing: -0.048rem;
   border-radius: 4rem;
   background-color: #f2f2f2;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {

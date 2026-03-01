@@ -1,6 +1,10 @@
 .service-stack {
   @include blockWrapper;
   margin-bottom: 30rem;
+
+  @include breakpoint(mobile) {
+    margin-bottom: 16rem;
+  }
 }
 
 .service-stack__content {
@@ -10,6 +14,13 @@
   gap: var(--column-gap);
   padding-top: 3rem;
   border-top: 1px solid #d4d4d4;
+
+  @include breakpoint(mobile) {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 }
 
 .service-stack__heading {
@@ -18,6 +29,15 @@
   font-weight: 600;
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
+
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.032rem;
+    font-family: var(--inter-display);
+  }
 }
 
 .service-stack__list {
@@ -25,6 +45,11 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--column-gap);
   row-gap: 1.5rem;
+
+  @include breakpoint(mobile) {
+    gap: 1rem;
+    row-gap: 0.5rem;
+  }
 }
 
 .service-stack__list-item {
@@ -33,4 +58,13 @@
   font-weight: 600;
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
+
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.032rem;
+    font-family: var(--inter-display);
+  }
 }

@@ -15,7 +15,7 @@ html {
   scrollbar-gutter: stable;
   scroll-behavior: smooth;
   scroll-padding-top: 4rem;
-
+  -webkit-font-smoothing: antialiased;
   @include breakpoint(mobile) {
     font-size: 10px;
   }
@@ -137,7 +137,9 @@ button {
 a {
   background-color: transparent;
   text-decoration: none;
-  transition: color 0.2s, text-decoration-color 0.2s;
+  transition:
+    color 0.2s,
+    text-decoration-color 0.2s;
   &:link,
   &:visited {
     color: inherit;

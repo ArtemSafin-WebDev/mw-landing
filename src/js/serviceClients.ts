@@ -1,9 +1,20 @@
 const DRAG_THRESHOLD_PX = 8;
+const TOUCH_DRAG_THRESHOLD_PX = 5;
+const DIRECTION_LOCK_RATIO = 1.2;
 const DEFAULT_SPEED_PX_PER_SECOND = 100;
 
 // Active pointer data while the user is dragging the marquee.
 type PointerState = {
   id: number;
+  startX: number;
+  startY: number;
+  startOffset: number;
+  dragging: boolean;
+};
+
+// Active touch data while the user is dragging the marquee.
+type TouchState = {
+  identifier: number;
   startX: number;
   startY: number;
   startOffset: number;
@@ -59,6 +70,7 @@ function initMarquee(root: HTMLElement) {
   let isInViewport = true;
   let lastTimestamp = 0;
   let pointerState: PointerState | null = null;
+  let touchState: TouchState | null = null;
   let frameId = 0;
   let resizeFrameId = 0;
   let intersectionObserver: IntersectionObserver | null = null;
@@ -139,7 +151,11 @@ function initMarquee(root: HTMLElement) {
   // move with constant px/s speed and wrap by loop width.
   const tick = (timestamp: number) => {
     const canAnimate =
-      loopWidth > 0 && !prefersReducedMotion.matches && isInViewport && pointerState === null;
+      loopWidth > 0 &&
+      !prefersReducedMotion.matches &&
+      isInViewport &&
+      pointerState === null &&
+      touchState === null;
 
     if (canAnimate) {
       if (lastTimestamp === 0) {
@@ -155,6 +171,7 @@ function initMarquee(root: HTMLElement) {
   };
 
   root.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "touch") return;
     if (pointerState) return;
     if (event.pointerType === "mouse" && event.button !== 0) return;
     if (loopWidth <= 0) return;
@@ -171,19 +188,28 @@ function initMarquee(root: HTMLElement) {
   });
 
   root.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch") return;
     if (!pointerState || pointerState.id !== event.pointerId) return;
     if (loopWidth <= 0) return;
 
     const deltaX = event.clientX - pointerState.startX;
     const deltaY = event.clientY - pointerState.startY;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
 
     if (!pointerState.dragging) {
       // Ignore tiny moves and keep vertical page scrolling unaffected.
-      if (Math.abs(deltaX) < DRAG_THRESHOLD_PX) return;
-      if (Math.abs(deltaX) <= Math.abs(deltaY)) {
+      const threshold =
+        event.pointerType === "touch" ? TOUCH_DRAG_THRESHOLD_PX : DRAG_THRESHOLD_PX;
+      if (Math.max(absX, absY) < threshold) return;
+
+      // Resolve intent only when the gesture clearly leans one way.
+      // This avoids dropping the drag too early on slightly diagonal swipes.
+      if (absY > absX * DIRECTION_LOCK_RATIO) {
         pointerState = null;
         return;
       }
+      if (absX < absY * DIRECTION_LOCK_RATIO) return;
 
       // Drag starts only for horizontal intent.
       pointerState.dragging = true;
@@ -202,6 +228,84 @@ function initMarquee(root: HTMLElement) {
   root.addEventListener("pointerup", onPointerEnd);
   root.addEventListener("pointercancel", onPointerEnd);
   root.addEventListener("lostpointercapture", onPointerEnd);
+
+  const onTouchEnd = (event: TouchEvent) => {
+    if (!touchState) return;
+    const touch = Array.from(event.changedTouches).find(
+      (changedTouch) => changedTouch.identifier === touchState?.identifier
+    );
+    if (!touch) return;
+
+    touchState = null;
+    root.classList.remove("is-dragging");
+    lastTimestamp = 0;
+  };
+
+  root.addEventListener(
+    "touchstart",
+    (event) => {
+      if (touchState) return;
+      if (loopWidth <= 0) return;
+
+      const touch = event.changedTouches[0];
+      if (!touch) return;
+
+      touchState = {
+        identifier: touch.identifier,
+        startX: touch.clientX,
+        startY: touch.clientY,
+        startOffset: offset,
+        dragging: false,
+      };
+      lastTimestamp = 0;
+    },
+    {
+      passive: true,
+    }
+  );
+
+  root.addEventListener(
+    "touchmove",
+    (event) => {
+      if (!touchState) return;
+      if (loopWidth <= 0) return;
+
+      const touch = Array.from(event.changedTouches).find(
+        (changedTouch) => changedTouch.identifier === touchState?.identifier
+      );
+      if (!touch) return;
+
+      const deltaX = touch.clientX - touchState.startX;
+      const deltaY = touch.clientY - touchState.startY;
+      const absX = Math.abs(deltaX);
+      const absY = Math.abs(deltaY);
+
+      if (!touchState.dragging) {
+        if (Math.max(absX, absY) < TOUCH_DRAG_THRESHOLD_PX) return;
+        if (absY > absX * DIRECTION_LOCK_RATIO) {
+          touchState = null;
+          return;
+        }
+        if (absX < absY * DIRECTION_LOCK_RATIO) return;
+
+        touchState.dragging = true;
+        root.classList.add("is-dragging");
+      }
+
+      offset = normalizeOffset(touchState.startOffset - deltaX, loopWidth);
+      applyTransform();
+
+      if (event.cancelable) {
+        event.preventDefault();
+      }
+    },
+    {
+      passive: false,
+    }
+  );
+
+  root.addEventListener("touchend", onTouchEnd);
+  root.addEventListener("touchcancel", onTouchEnd);
 
   // Pause work when section is offscreen.
   if ("IntersectionObserver" in window) {

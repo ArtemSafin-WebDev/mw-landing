@@ -1,9 +1,11 @@
 .service-quote {
   @include blockWrapper;
   margin-bottom: 30rem;
+  padding-top: 30rem;
 
   @include breakpoint(mobile) {
     margin-bottom: 16rem;
+    padding-top: 16rem;
   }
 }
 

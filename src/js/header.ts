@@ -44,28 +44,21 @@ export default function header() {
     ".page-header__burger .page-header__burger-inner:nth-child(2)"
   )!;
 
-  new SectionTransition(logo, secondImage).init();
-  new SectionTransition(studio, secondText).init();
-  new SectionTransition(burger, burgerItem).init();
+  const initiallyLight = header.classList.contains("page-header--light-on-start");
+
+  new SectionTransition(logo, secondImage, { initiallyLight }).init();
+  new SectionTransition(studio, secondText, { initiallyLight }).init();
+  new SectionTransition(burger, burgerItem, { initiallyLight }).init();
 
   let mm = gsap.matchMedia();
   mm.add("(min-width: 641px)", () => {
     const instances = navLinks.map((link) => {
       const span = link.querySelector<HTMLSpanElement>("span:nth-child(2)")!;
-      return new SectionTransition(link, span).init();
+      return new SectionTransition(link, span, { initiallyLight }).init();
     });
 
     return () => {
       instances.forEach((instance) => instance.destroy());
     };
   });
-
-  if (header.classList.contains("page-header--light-on-start")) {
-    const lightLayers = [secondImage, secondText, burgerItem];
-    navLinks.forEach((link) => {
-      const span = link.querySelector<HTMLSpanElement>("span:nth-child(2)");
-      if (span) lightLayers.push(span);
-    });
-    gsap.set(lightLayers, { clipPath: "inset(0% 0 0 0)" });
-  }
 }

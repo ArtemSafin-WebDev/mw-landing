@@ -4,11 +4,10 @@
   color: white;
   padding-bottom: 6rem;
   padding-top: 26rem;
-  margin-bottom: 30rem;
 
   @include breakpoint(mobile) {
     padding-bottom: 2rem;
-    margin-bottom: 16rem;
+
     padding-top: 14rem;
   }
 }

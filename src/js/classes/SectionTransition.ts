@@ -3,16 +3,30 @@ import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface SectionTransitionOptions {
+  darkSectionSelector?: string;
+  lightSectionSelector?: string;
+  initiallyLight?: boolean;
+}
+
 export default class SectionTransition {
   private darkSections: HTMLElement[] = [];
   private lightSections: HTMLElement[] = [];
   private timelines: gsap.core.Timeline[] = [];
+  private initiallyLight: boolean;
+
   constructor(
     private element: HTMLElement,
     private elementLayer: HTMLElement,
-    darkSectionSelector: string = "[data-section='dark']",
-    lightSectionSelector: string = "[data-section='light']"
+    options: SectionTransitionOptions = {}
   ) {
+    const {
+      darkSectionSelector = "[data-section='dark']",
+      lightSectionSelector = "[data-section='light']",
+      initiallyLight = false,
+    } = options;
+
+    this.initiallyLight = initiallyLight;
     this.darkSections = Array.from(
       document.querySelectorAll(darkSectionSelector)
     );
@@ -84,6 +98,10 @@ export default class SectionTransition {
   public init = () => {
     this.createDarkSectionsTimelines();
     this.createLightSectionsTimelines();
+
+    if (this.initiallyLight) {
+      gsap.set(this.elementLayer, { clipPath: "inset(0% 0 0 0)" });
+    }
 
     return this;
   };

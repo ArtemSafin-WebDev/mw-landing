@@ -44,12 +44,16 @@ export default function serviceSteps() {
     lists.forEach(updateStickyOffsets);
   };
 
-  let resizeRafId = 0;
-  const handleResize = () => {
-    if (resizeRafId) {
-      window.cancelAnimationFrame(resizeRafId);
+  let updateRafId = 0;
+  const scheduleUpdate = () => {
+    if (updateRafId) {
+      window.cancelAnimationFrame(updateRafId);
     }
-    resizeRafId = window.requestAnimationFrame(updateAll);
+    updateRafId = window.requestAnimationFrame(updateAll);
+  };
+
+  const handleResize = () => {
+    scheduleUpdate();
   };
 
   updateAll();
@@ -58,5 +62,28 @@ export default function serviceSteps() {
 
   if ("fonts" in document) {
     void document.fonts.ready.then(updateAll);
+  }
+
+  if ("ResizeObserver" in window) {
+    const resizeObserver = new ResizeObserver(() => {
+      scheduleUpdate();
+    });
+
+    const observeTargets = new Set<HTMLElement>();
+
+    lists.forEach((list) => {
+      const section = list.closest<HTMLElement>(".service-steps");
+      const heading = section?.querySelector<HTMLElement>(".service-steps__heading");
+      if (heading) {
+        observeTargets.add(heading);
+      }
+
+      const titleTops = Array.from(
+        list.querySelectorAll<HTMLElement>(".service-steps__card-title")
+      );
+      titleTops.forEach((titleTop) => observeTargets.add(titleTop));
+    });
+
+    observeTargets.forEach((target) => resizeObserver.observe(target));
   }
 }

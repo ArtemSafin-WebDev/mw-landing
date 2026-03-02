@@ -42,6 +42,7 @@ export default class SectionTransition {
         this.elementLayer,
         {
           clipPath: "inset(100% 0 0 0)",
+          immediateRender: false,
         },
         {
           duration: 1,

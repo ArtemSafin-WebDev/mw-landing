@@ -1,5 +1,6 @@
 .service-clients {
   @include blockWrapper;
+  padding-top: 22rem;
   margin-bottom: 30rem;
 
   @include breakpoint(mobile) {

@@ -9,6 +9,15 @@
   view-transition-name: header;
 }
 
+.page-header--light-on-start {
+  .page-header__logo-image:nth-child(2),
+  .page-header__studio > span:nth-child(2),
+  .page-header__burger-inner:nth-child(2),
+  .page-header__nav-link > span:nth-child(2) {
+    clip-path: inset(0% 0 0 0);
+  }
+}
+
 .page-header__content {
   padding-top: 1.5rem;
   @include blockContent;

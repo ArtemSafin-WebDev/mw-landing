@@ -3,6 +3,7 @@ const service = {
     title: "Услуга",
 
     footerCompact: false,
+    headerLightOnStart: true,
   },
 };
 

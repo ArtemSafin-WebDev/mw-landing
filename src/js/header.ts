@@ -59,4 +59,13 @@ export default function header() {
       instances.forEach((instance) => instance.destroy());
     };
   });
+
+  if (header.classList.contains("page-header--light-on-start")) {
+    const lightLayers = [secondImage, secondText, burgerItem];
+    navLinks.forEach((link) => {
+      const span = link.querySelector<HTMLSpanElement>("span:nth-child(2)");
+      if (span) lightLayers.push(span);
+    });
+    gsap.set(lightLayers, { clipPath: "inset(0% 0 0 0)" });
+  }
 }

@@ -7,14 +7,15 @@ export default function mobileCallback() {
   const mobileCallback =
     document.querySelector<HTMLLinkElement>(".mobile-callback");
 
-  const introCallbackBtn =
-    document.querySelector<HTMLLinkElement>(".intro__btn");
-  if (!mobileCallback || !introCallbackBtn) return;
+  const callbackTrigger = document.querySelector<HTMLLinkElement>(
+    ".intro__btn, .service-intro__cta-link"
+  );
+  if (!mobileCallback || !callbackTrigger) return;
   let mm = gsap.matchMedia();
   mm.add("(max-width: 640px)", () => {
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: introCallbackBtn,
+        trigger: callbackTrigger,
         start: "bottom top",
         toggleActions: "play none none reverse",
       },

@@ -5,10 +5,18 @@
   padding-bottom: 6rem;
   padding-top: 26rem;
 
+  & + [data-section="light"] {
+    padding-top: 30rem;
+  }
+
   @include breakpoint(mobile) {
     padding-bottom: 2rem;
 
     padding-top: 14rem;
+
+    & + [data-section="light"] {
+      padding-top: 16rem;
+    }
   }
 }
 

@@ -1,7 +1,8 @@
 const services = {
   "/services.html": {
     title: "Услуги",
-    headerBtnsVisible: true,
+    headerLogoVisible: true,
+    headerCallbackBtnVisible: true,
     footerCompact: false,
   },
 };

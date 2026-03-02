@@ -4,6 +4,14 @@
   backface-visibility: hidden;
   background-color: var(--text-color);
   color: white;
+
+  & + [data-section="light"] {
+    padding-top: 22rem;
+
+    @include breakpoint(mobile) {
+      padding-top: 10rem;
+    }
+  }
 }
 
 .service-intro__bg {
@@ -15,6 +23,10 @@
     background-color: rgba(0, 0, 0, 0.35);
     position: absolute;
     inset: 0;
+
+    @include breakpoint(mobile) {
+      background-color: rgba(0, 0, 0, 0.45);
+    }
   }
 }
 
@@ -56,8 +68,7 @@
     padding-top: 2rem;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-gap: var(--column-gap);
-    grid-template-rows: auto 1fr auto auto;
-    grid-row-gap: 1rem;
+    grid-template-rows: 1fr auto 1fr;
   }
 }
 
@@ -73,6 +84,7 @@
 
   @include breakpoint(mobile) {
     grid-column: 1 / -1;
+    grid-row: 2 / 3;
     grid-row: unset;
     display: none;
   }
@@ -88,7 +100,6 @@
   top: 0;
   transition: width 0.6s;
   pointer-events: all;
-
   width: calc(66.66% - 1rem);
 
   @media (hover: hover) and (pointer: fine) {
@@ -120,6 +131,19 @@
   }
 }
 
+.service-intro__text-content {
+  display: contents;
+
+  @include breakpoint(mobile) {
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+}
 .service-intro__showreel-card-image {
   position: absolute;
   left: 0;
@@ -201,6 +225,15 @@
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
   grid-column: 1 / 7;
+
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.032rem;
+    font-family: var(--inter-display);
+  }
 }
 
 .service-intro__title {
@@ -211,8 +244,15 @@
   line-height: 120%;
   letter-spacing: -0.16rem;
   grid-column: 7 / 12;
-  // max-width: 70rem;
   text-wrap: balance;
+
+  @include breakpoint(mobile) {
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -0.096rem;
+  }
 }
 
 .service-intro__letter {
@@ -222,17 +262,35 @@
   line-height: 75%;
   letter-spacing: -1rem;
 
+  @include breakpoint(mobile) {
+    font-size: 12rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -0.6rem;
+  }
+
   &--one {
     grid-row: 3 / 4;
     grid-column: 1 / 3;
     align-self: flex-end;
-    margin-left: -0.1em;
+    margin-left: -0.08em;
+
+    @include breakpoint(mobile) {
+      grid-column: 1 / 2;
+    }
   }
 
   &--two {
     grid-row: 3 / 4;
     grid-column: 3 / 5;
     align-self: flex-end;
+    margin-left: -0.08em;
+
+    @include breakpoint(mobile) {
+      justify-self: center;
+      grid-column: 2 / 4;
+      margin-left: -0.08em;
+    }
   }
 
   &--three {
@@ -240,6 +298,11 @@
     align-self: flex-end;
     grid-column: 11 / -1;
     justify-self: flex-end;
+    margin-right: 0.04em;
+
+    @include breakpoint(mobile) {
+      grid-column: 4 / 5;
+    }
   }
 }
 
@@ -270,5 +333,16 @@
     &:hover {
       background-color: var(--primary-color-hover);
     }
+  }
+
+  @include breakpoint(mobile) {
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: -0.048rem;
+    align-self: center;
+    margin-top: 2rem;
+    font-family: var(--inter-display);
   }
 }

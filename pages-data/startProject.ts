@@ -1,7 +1,8 @@
 const startProject = {
   "/start-project.html": {
     title: "Проект",
-    headerBtnsVisible: true,
+    headerLogoVisible: true,
+    headerCallbackBtnVisible: true,
     footerCompact: true,
   },
 };

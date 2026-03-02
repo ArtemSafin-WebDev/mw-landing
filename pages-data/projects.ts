@@ -1,7 +1,8 @@
 const projects = {
   "/projects.html": {
     title: "Проекты",
-    headerBtnsVisible: true,
+    headerLogoVisible: true,
+    headerCallbackBtnVisible: true,
   },
 };
 

@@ -6,7 +6,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default function serviceSteps() {
   const sections = Array.from(document.querySelectorAll<HTMLElement>(".service-steps"));
   sections.forEach((section) => {
+    const list = section.querySelector<HTMLElement>(".service-steps__list");
     const items = Array.from(section.querySelectorAll<HTMLElement>(".service-steps__list-item"));
+    if (!list || !items.length) return;
 
     const HEADER_HEIGHT = 100;
     const getHeadingHeight = (element: HTMLElement) => {
@@ -23,6 +25,18 @@ export default function serviceSteps() {
 
       return HEADER_HEIGHT + stackedHeadingsHeight;
     };
+    const getRequiredEndSpacer = () => {
+      const lastItemIndex = items.length - 1;
+      const lastItem = items[lastItemIndex];
+      const lastOffset = getStackOffset(lastItemIndex);
+
+      return Math.max(0, window.innerHeight - lastItem.offsetHeight - lastOffset);
+    };
+    const applyEndSpacer = () => {
+      list.style.paddingBottom = `${getRequiredEndSpacer()}px`;
+    };
+
+    applyEndSpacer();
 
     items.forEach((item, itemIndex) => {
       ScrollTrigger.create({
@@ -30,16 +44,9 @@ export default function serviceSteps() {
         pin: true,
         pinSpacing: false,
         invalidateOnRefresh: true,
+        onRefreshInit: applyEndSpacer,
         endTrigger: section,
-
-        end: () => {
-          const offset = getStackOffset(itemIndex);
-          const currentHeadingHeight = getHeadingHeight(item);
-          const extraScrollToReachStart = Math.max(0, window.innerHeight - item.offsetHeight - offset);
-          const extraScroll = extraScrollToReachStart + currentHeadingHeight;
-
-          return `bottom+=${extraScroll} bottom`;
-        },
+        end: "bottom bottom",
         start: () => {
           const offset = getStackOffset(itemIndex);
 

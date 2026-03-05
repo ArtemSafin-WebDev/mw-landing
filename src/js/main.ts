@@ -16,9 +16,11 @@ import fancybox from "./fancybox";
 import services from "./services";
 import serviceClients from "./serviceClients";
 import serviceProjects from "./serviceProjects";
+import serviceSteps from "./serviceSteps";
 
 document.addEventListener("DOMContentLoaded", () => {
   smoothScrolling();
+  serviceSteps();
   header();
   // storiesBlockSlider();
   menu();
@@ -34,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   serviceClients();
   serviceProjects();
   loader();
+
   // Prevent default behavior for buttons inside swiper slides
   document.querySelectorAll(".swiper-slide button").forEach((button) => {
     button.addEventListener("click", (e) => {

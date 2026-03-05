@@ -55,12 +55,11 @@
 }
 
 .service-steps__card {
-  padding-top: 3rem;
   padding-bottom: 8rem;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: var(--column-gap);
-  row-gap: 4rem;
+  row-gap: 0;
   background-color: #fff;
 
   &::before {
@@ -103,6 +102,8 @@
   font-weight: 600;
   line-height: 120%;
   letter-spacing: -0.16rem;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
 
   @include breakpoint(mobile) {
     font-size: 2.4rem;

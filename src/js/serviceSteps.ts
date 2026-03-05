@@ -10,7 +10,22 @@ export default function serviceSteps() {
     const items = Array.from(section.querySelectorAll<HTMLElement>(".service-steps__list-item"));
     if (!list || !items.length) return;
 
-    const HEADER_HEIGHT = 100;
+    const getHeaderOffset = () => {
+      const HEADER_EXTRA_OFFSET = 30;
+
+      const headerContent = document.querySelector<HTMLElement>(".page-header__content");
+      if (headerContent) {
+        return Math.max(0, headerContent.getBoundingClientRect().bottom + HEADER_EXTRA_OFFSET);
+      }
+
+      const header = document.querySelector<HTMLElement>(".page-header");
+      if (header) {
+        return Math.max(0, header.getBoundingClientRect().bottom + HEADER_EXTRA_OFFSET);
+      }
+
+      return HEADER_EXTRA_OFFSET;
+    };
+
     const getHeadingHeight = (element: HTMLElement) => {
       const heading = element.querySelector<HTMLElement>(".service-steps__card-title");
       return heading?.offsetHeight ?? 0;
@@ -23,7 +38,7 @@ export default function serviceSteps() {
         0
       );
 
-      return HEADER_HEIGHT + stackedHeadingsHeight;
+      return getHeaderOffset() + stackedHeadingsHeight;
     };
     const getRequiredEndSpacer = () => {
       const lastItemIndex = items.length - 1;

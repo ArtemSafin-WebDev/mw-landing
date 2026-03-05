@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function serviceSteps() {
   const sections = Array.from(document.querySelectorAll<HTMLElement>(".service-steps"));
   sections.forEach((section) => {
+    const sectionHeading = section.querySelector<HTMLElement>(".service-steps__heading");
     const list = section.querySelector<HTMLElement>(".service-steps__list");
     const items = Array.from(section.querySelectorAll<HTMLElement>(".service-steps__list-item"));
     if (!list || !items.length) return;
@@ -52,6 +53,21 @@ export default function serviceSteps() {
     };
 
     applyEndSpacer();
+
+    if (sectionHeading && window.matchMedia("(min-width: 641px)").matches) {
+      ScrollTrigger.create({
+        trigger: items[0],
+        pin: sectionHeading,
+        pinSpacing: false,
+        invalidateOnRefresh: true,
+        endTrigger: section,
+        end: "bottom bottom",
+        start: () => {
+          const offset = getStackOffset(0);
+          return `top top+=${offset}`;
+        },
+      });
+    }
 
     items.forEach((item, itemIndex) => {
       ScrollTrigger.create({

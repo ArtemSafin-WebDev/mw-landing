@@ -1,11 +1,9 @@
 .service-steps {
   @include blockWrapper;
   margin-bottom: calc(32rem - 8rem);
-  --step: 11.8rem;
 
   @include breakpoint(mobile) {
     margin-bottom: 14rem;
-    --step: 7.7rem;
   }
 }
 
@@ -28,14 +26,12 @@
   font-weight: 600;
   line-height: 2.4rem;
   letter-spacing: -0.08rem;
-  position: sticky;
-  top: 12rem;
+
   align-self: start;
 
   @include breakpoint(mobile) {
     align-self: stretch;
 
-    position: static;
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 500;
@@ -51,11 +47,8 @@
 }
 
 .service-steps__list-item {
-  --sticky-top: calc(var(--n, 1) * var(--step));
   border-top: 1px solid #d4d4d4;
-  position: sticky;
-  z-index: var(--n, 1);
-  top: var(--sticky-top);
+
   &::before {
     display: none;
   }

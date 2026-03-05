@@ -21,18 +21,12 @@ export default function serviceSteps() {
         end: "bottom bottom",
         start: () => {
           const itemsBefore = items.slice(0, itemIndex);
-          const totalHeight = itemsBefore.reduce(
-            (acc, currentElement) => (acc += currentElement.offsetHeight),
-            0
-          );
-          const headingsHeight = itemsBefore.reduce((acc, currentElement) => {
+          const stackedHeadingsHeight = itemsBefore.reduce((acc, currentElement) => {
             const heading = currentElement.querySelector<HTMLElement>(".service-steps__card-title");
             if (!heading) return acc;
             return (acc += heading.offsetHeight);
           }, 0);
-          const heightWithoutHeadings = totalHeight - headingsHeight;
-
-          const offset = HEADER_HEIGHT + heightWithoutHeadings;
+          const offset = HEADER_HEIGHT + stackedHeadingsHeight;
 
           return `top top+=${offset}`;
         },

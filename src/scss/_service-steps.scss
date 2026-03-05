@@ -1,6 +1,6 @@
 .service-steps {
   @include blockWrapper;
-  margin-bottom: calc(32rem - 8rem);
+  margin-bottom: 14rem;
 
   @include breakpoint(mobile) {
     margin-bottom: 6rem;

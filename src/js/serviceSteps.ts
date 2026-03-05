@@ -7,6 +7,7 @@ export default function serviceSteps() {
   const sections = Array.from(document.querySelectorAll<HTMLElement>(".service-steps"));
   sections.forEach((section) => {
     const sectionHeading = section.querySelector<HTMLElement>(".service-steps__heading");
+    const content = section.querySelector<HTMLElement>(".service-steps__content");
     const list = section.querySelector<HTMLElement>(".service-steps__list");
     const items = Array.from(section.querySelectorAll<HTMLElement>(".service-steps__list-item"));
     if (!list || !items.length) return;
@@ -26,6 +27,16 @@ export default function serviceSteps() {
 
       return HEADER_EXTRA_OFFSET;
     };
+    const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
+    const getSectionHeadingOffset = () => {
+      if (!sectionHeading || !isMobile()) return 0;
+
+      const contentStyles = content ? window.getComputedStyle(content) : null;
+      const rawGap = contentStyles ? contentStyles.rowGap || contentStyles.gap : "0";
+      const gapBetweenHeadingAndList = Number.parseFloat(rawGap) || 0;
+
+      return sectionHeading.offsetHeight + gapBetweenHeadingAndList;
+    };
 
     const getHeadingHeight = (element: HTMLElement) => {
       const heading = element.querySelector<HTMLElement>(".service-steps__card-title");
@@ -39,7 +50,7 @@ export default function serviceSteps() {
         0
       );
 
-      return getHeaderOffset() + stackedHeadingsHeight;
+      return getHeaderOffset() + getSectionHeadingOffset() + stackedHeadingsHeight;
     };
     const getRequiredEndSpacer = () => {
       const lastItemIndex = items.length - 1;
@@ -54,16 +65,16 @@ export default function serviceSteps() {
 
     applyEndSpacer();
 
-    if (sectionHeading && window.matchMedia("(min-width: 641px)").matches) {
+    if (sectionHeading) {
       ScrollTrigger.create({
-        trigger: items[0],
+        trigger: sectionHeading,
         pin: sectionHeading,
         pinSpacing: false,
         invalidateOnRefresh: true,
         endTrigger: section,
         end: "bottom bottom",
         start: () => {
-          const offset = getStackOffset(0);
+          const offset = getHeaderOffset();
           return `top top+=${offset}`;
         },
       });

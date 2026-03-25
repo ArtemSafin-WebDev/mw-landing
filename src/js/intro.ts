@@ -4,10 +4,60 @@ import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function intro() {
+  const setupParallax = ({
+    section,
+    layerSelector,
+    contentSelector,
+    withScale = true,
+  }: {
+    section: HTMLElement;
+    layerSelector: string;
+    contentSelector: string;
+    withScale?: boolean;
+  }) => {
+    const layer = section.querySelector<HTMLElement>(layerSelector);
+    const content = section.querySelector<HTMLElement>(contentSelector);
+
+    if (!layer || !content) return;
+
+    const mm = gsap.matchMedia();
+    mm.add(
+      "(min-width: 641px)",
+      () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            markers: false,
+            scrub: true,
+          },
+        });
+
+        tl.addLabel("parallaxStart");
+        tl.to(layer, {
+          yPercent: 50,
+          duration: 1,
+          ease: "none",
+        });
+        if (withScale) {
+          tl.to(
+            content,
+            {
+              scale: 0.95,
+              duration: 1,
+            },
+            "parallaxStart"
+          );
+        }
+      },
+      section
+    );
+  };
+
   const elements = Array.from(document.querySelectorAll<HTMLElement>(".intro"));
 
   elements.forEach((element) => {
-    let mm = gsap.matchMedia();
     const introBtn = element.querySelector<HTMLLinkElement>(".intro__btn");
     const bgItems = Array.from(
       element.querySelectorAll<HTMLElement>(".intro__bg-item")
@@ -54,35 +104,23 @@ export default function intro() {
       timer = null;
     });
 
-    mm.add(
-      "(min-width: 641px)",
-      () => {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: element,
-            start: "top top",
-            end: "bottom top",
-            markers: false,
-            scrub: true,
-          },
-        });
+    setupParallax({
+      section: element,
+      layerSelector: ".intro__parallax-layer",
+      contentSelector: ".intro__content",
+    });
+  });
 
-        tl.addLabel("parallaxStart");
-        tl.to(".intro__parallax-layer", {
-          yPercent: 50,
-          duration: 1,
-          ease: "none",
-        });
-        tl.to(
-          ".intro__content",
-          {
-            scale: 0.95,
-            duration: 1,
-          },
-          "parallaxStart"
-        );
-      },
-      element
-    );
+  const serviceIntroElements = Array.from(
+    document.querySelectorAll<HTMLElement>(".service-intro")
+  );
+
+  serviceIntroElements.forEach((element) => {
+    setupParallax({
+      section: element,
+      layerSelector: ".service-intro__parallax-layer",
+      contentSelector: ".service-intro__content",
+      withScale: false,
+    });
   });
 }

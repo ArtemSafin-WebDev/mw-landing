@@ -7,14 +7,10 @@ export default function services() {
   const elements = Array.from(document.querySelectorAll(".services"));
 
   elements.forEach((element) => {
-    const accordions = Array.from(
-      element.querySelectorAll(".services__services-accordion")
-    );
+    const accordions = Array.from(element.querySelectorAll(".services__services-accordion"));
     accordions.forEach((accordion) => {
       const video = accordion.querySelector<HTMLVideoElement>("video");
-      const btn = accordion.querySelector<HTMLButtonElement>(
-        ".services__services-accordion-btn"
-      );
+      const btn = accordion.querySelector<HTMLButtonElement>(".services__services-accordion-btn");
       const dropdown = accordion.querySelector<HTMLDivElement>(
         ".services__services-accordion-dropdown"
       );
@@ -40,17 +36,14 @@ export default function services() {
       });
 
       accordion.addEventListener("mouseenter", () => {
-        if (!video) return;
-        console.log("MOUSEENTER");
         accordion.classList.add("video-shown");
+        if (!video) return;
         video.currentTime = 0;
         video.play();
       });
       accordion.addEventListener("mouseleave", () => {
-        if (!video) return;
-        console.log("MOUSELEAVE");
         accordion.classList.remove("video-shown");
-        console.log("contains", accordion.classList.contains("active"));
+        if (!video) return;
         if (!accordion.classList.contains("active")) {
           video.pause();
           video.currentTime = 0;
